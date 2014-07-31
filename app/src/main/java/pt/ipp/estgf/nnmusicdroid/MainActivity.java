@@ -30,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 //Abre a activity Music
                 Intent intent = new Intent(MainActivity.this, MyCountriesActivity.class);
+                intent.putExtra("musicas", 1);
                 startActivity(intent);
             }
         });
@@ -43,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View view){
                 //abre a activity artist
                 Intent intent = new Intent(MainActivity.this, MyCountriesActivity.class);
+                intent.putExtra("artistas", 2);
                 startActivity(intent);
             }
         });

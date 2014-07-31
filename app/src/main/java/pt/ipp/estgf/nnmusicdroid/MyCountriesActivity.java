@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 
+import java.security.Key;
 import java.util.ArrayList;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
@@ -38,23 +39,66 @@ public class MyCountriesActivity extends ListActivity {
         // Obtem a lista
         ListView listView = this.getListView();
 
-        // Adiciona o evento do click
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
-                // Obtem o place para esta posição
-                Place place = MyCountriesActivity.this.placesList.get(index);
+        String sinal = getIntent().getStringExtra("musicas");
 
+
+        if (sinal == "musicas") {
+
+            // Adiciona o evento do click
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                    // Obtem o place para esta posição
+                    Place place = MyCountriesActivity.this.placesList.get(index);
+
+                    // Cria o intent
+                    Intent intent = new Intent(MainActivity.globalContext, MusicListActivity.class);
+
+                    // Adiciona o id do place
+                    intent.putExtra("id", place.getId());
+
+                    // Lança a Activity
+                    MyCountriesActivity.this.startActivity(intent);
+                }
+            });
+        }else {
+            // Adiciona o evento do click
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                    // Obtem o place para esta posição
+                    Place place = MyCountriesActivity.this.placesList.get(index);
+
+                    // Cria o intent
+                    Intent intent = new Intent(MainActivity.globalContext, ArtistListActivity.class);
+
+                    // Adiciona o id do place
+                    intent.putExtra("id", place.getId());
+
+                    // Lança a Activity
+                    MyCountriesActivity.this.startActivity(intent);
+                }
+            });
+        }
+
+
+        // Adiciona o evento do click
+        //listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //    @Override
+        //    public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+        //        // Obtem o place para esta posição
+        //        Place place = MyCountriesActivity.this.placesList.get(index);
+        //
                 // Cria o intent
-                Intent intent = new Intent(MainActivity.globalContext, MusicListActivity.class);
+        //        Intent intent = new Intent(MainActivity.globalContext, ArtistListActivity.class);
 
                 // Adiciona o id do place
-                intent.putExtra("id", place.getId());
+        //        intent.putExtra("id", place.getId());
 
                 // Lança a Activity
-                MyCountriesActivity.this.startActivity(intent);
-            }
-        });
+        //        MyCountriesActivity.this.startActivity(intent);
+        //    }
+        //});
     }
 
     private void reloadListCountries(){
@@ -93,4 +137,6 @@ public class MyCountriesActivity extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -2,25 +2,17 @@ package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.ListActivity;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import pt.ipp.estgf.cmu.musicdroidlib.TopArtist;
+import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
+import pt.ipp.estgf.nnmusicdroid.adapter.ArtistAdapter;
+import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
+import pt.ipp.estgf.nnmusicdroid.tasks.ArtistTask;
+
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-
-import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
-import pt.ipp.estgf.cmu.musicdroidlib.TopArtist;
-import pt.ipp.estgf.nnmusicdroid.adapter.ArtistAdapter;
-import pt.ipp.estgf.nnmusicdroid.tasks.ArtistTask;
-import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
 
 public class ArtistListActivity extends ListActivity {
 

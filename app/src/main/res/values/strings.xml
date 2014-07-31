@@ -21,7 +21,8 @@
     <string name="title_activity_artist_list">ArtistListActivity</string>
     <string name="title_activity_music_list">MusicListActivity</string>
     <string name="title_activity_about">AboutActivity</string>
-    <string name="lista_vazia">Lista Vazia</string>
-    <string name="top_Tracks">Ranking de musicas</string>
+    <string name="top_Tracks">Top de musicas</string>
+    <string name="top_Artists">Top de Artistas</string>
+    <string name="lista_vazia">Vazia</string>
 
 </resources>

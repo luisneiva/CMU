@@ -1,10 +1,14 @@
 package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 
 import java.util.ArrayList;
@@ -30,6 +34,27 @@ public class MyCountriesActivity extends ListActivity {
 
         //Adicionar ao placeAdapter
         setListAdapter(placeAdapter);
+
+        // Obtem a lista
+        ListView listView = this.getListView();
+
+        // Adiciona o evento do click
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                // Obtem o place para esta posição
+                Place place = MyCountriesActivity.this.placesList.get(index);
+
+                // Cria o intent
+                Intent intent = new Intent(MainActivity.globalContext, MusicListActivity.class);
+
+                // Adiciona o id do place
+                intent.putExtra("id", place.getId());
+
+                // Lança a Activity
+                MyCountriesActivity.this.startActivity(intent);
+            }
+        });
     }
 
     private void reloadListCountries(){

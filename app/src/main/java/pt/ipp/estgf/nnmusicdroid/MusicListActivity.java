@@ -5,7 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
 import pt.ipp.estgf.cmu.musicdroidlib.Track;
+import pt.ipp.estgf.cmu.musicdroidlib.parsers.TopTrackParser;
 import pt.ipp.estgf.nnmusicdroid.adapter.TrackAdapter;
+import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
+import pt.ipp.estgf.nnmusicdroid.tasks.MusicTask;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -28,6 +31,8 @@ public class MusicListActivity extends ListActivity {
     private TrackAdapter trackAdapter = null;
     private ArrayList<TopTrack> topTrack = new ArrayList<TopTrack>();
 
+    private long placeID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +44,47 @@ public class MusicListActivity extends ListActivity {
 
         //Adicionar ao place adapter
         setListAdapter(trackAdapter);
+
+        // Obtem o id do place a mostrar
+        this.placeID = getIntent().getLongExtra("id", -1);
     }
 
     private void reloadListTracks(){
         this.dbHelper = new DatabaseHelper(getApplicationContext());
 
+        MusicTask task = new MusicTask(new BasicHandler() {
+            @Override
+            public void run() {
+                // Faz com que o codigo a seguir seja executado na UIThread
+                MusicListActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MusicListActivity.this.updateList();
+                    }
+                });
+            }
+        });
+
+        // Inicia a task
+        task.execute(this.placeID);
+
+        this.updateList();
+    }
+
+    private void updateList() {
         // Carrega as top tracks de um place
-        TopTrack.getForPlace(1, topTrack, dbHelper.getReadableDatabase());
+        TopTrack.getForPlace(this.placeID, topTrack, dbHelper.getReadableDatabase());
+
+        // Notifica o adpater que os dados foram alterados
+        this.trackAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Preenche a lista com os dados
+        reloadListTracks();
     }
 
     @Override

@@ -17,7 +17,7 @@ import android.util.Log;
 public class DefaultParser extends DefaultHandler {
 
 	public static final int HTTP_TIMEOUT = 6000;
-	public static final String API_KEY = "";
+	public static final String API_KEY = "e70fb00cd2b137eef1dadeeaa2a3e167";
 	public static final String GENERIC_URL = "http://ws.audioscrobbler.com/2.0/?method=";
 	
 	public void request(String request_url, ContentHandler handler) {

@@ -19,6 +19,7 @@ import pt.ipp.estgf.nnmusicdroid.adapter.CountryAdapter;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 import pt.ipp.estgf.nnmusicdroid.model.Country;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -53,54 +54,58 @@ public class CountryListActivity extends ListActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int index, long l) {
-
-
                 // Obtem o Country para a posição
                 final Country country = CountryListActivity.this.countryList.get(index);
 
-                if (country !=  null ) {
+                // Verifica se este pais já é favorito
+                MyDbAccess myDB = new MyDbAccess();
+                ArrayList<Place> myPlaces = Place.getAll(null, myDB.getReadableDatabase());
 
-                    // Questionar e adicionar o pais à lista de preferidos. Adicionar o Place (Dialog)
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(CountryListActivity.this);
-                    builder1.setMessage("Adicionar o País selecionado à sua lista?");
-                    builder1.setCancelable(false);
-
-                    builder1.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int whish) {
-                            // Obtem as coordenadas
-                            try {
-                                Geocoder geocoder = new Geocoder(MainActivity.globalContext, Locale.getDefault());
-                                List<Address> addresses = geocoder.getFromLocationName(country.getName(), 1);
-                                Address address = addresses.get(0);
-                                float longitude = (float) address.getLongitude();
-                                float latitude = (float) address.getLatitude();
-
-                                // Cria o place
-                                MyDbAccess myDbAccess = new MyDbAccess();
-                                Place.create(country.getName(), latitude, longitude, myDbAccess.getWritableDatabase());
-
-                                //Mensagem de confirmação do país adicionado
-                                Toast.makeText(CountryListActivity.this, "" + "País adicionado à sua lista de preferidos!", Toast.LENGTH_LONG).show();
-
-                            } catch (Exception ex) {
-                                Log.d("CountryListActivity", ex.getMessage());
-                            }
-                        }
-                    });
-
-                    builder1.setNegativeButton("No", new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialogInterface, int wish){
-                            dialogInterface.cancel();
-                        }
-                    });
-
-                    AlertDialog alert = builder1.create();
-                    alert.show();
-
-                }else {
-                    Toast.makeText(CountryListActivity.this, "" + "País já existe na sua lista!", Toast.LENGTH_LONG).show();
+                for (Place place : myPlaces) {
+                    if (place.getName().equals(country.getName())) {
+                        Toast.makeText(CountryListActivity.this, "" + "País já existe na sua lista!", Toast.LENGTH_LONG).show();
+                        return false;
+                    }
                 }
+
+                // Questionar e adicionar o pais à lista de preferidos. Adicionar o Place (Dialog)
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(CountryListActivity.this);
+                builder1.setMessage("Adicionar o País selecionado à sua lista?");
+                builder1.setCancelable(false);
+
+                builder1.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int whish) {
+                        // Obtem as coordenadas
+                        try {
+                            Geocoder geocoder = new Geocoder(MainActivity.globalContext, Locale.getDefault());
+                            List<Address> addresses = geocoder.getFromLocationName(country.getName(), 1);
+                            Address address = addresses.get(0);
+                            float longitude = (float) address.getLongitude();
+                            float latitude = (float) address.getLatitude();
+
+                            // Cria o place
+                            MyDbAccess myDbAccess = new MyDbAccess();
+                            Place.create(country.getName(), latitude, longitude, myDbAccess.getWritableDatabase());
+
+                            //Mensagem de confirmação do país adicionado
+                            Toast.makeText(CountryListActivity.this, "" + "País adicionado à sua lista de preferidos!", Toast.LENGTH_LONG).show();
+
+                        } catch (Exception ex) {
+                            Log.d("CountryListActivity", ex.getMessage());
+                        }
+                    }
+                });
+
+                builder1.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialogInterface, int wish){
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog alert = builder1.create();
+                alert.show();
+
                 return false;
             }
         });

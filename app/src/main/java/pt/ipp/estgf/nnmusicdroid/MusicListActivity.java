@@ -4,22 +4,13 @@ import android.app.ListActivity;
 import android.database.sqlite.SQLiteDatabase;
 import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
-import pt.ipp.estgf.cmu.musicdroidlib.Track;
-import pt.ipp.estgf.cmu.musicdroidlib.parsers.TopTrackParser;
 import pt.ipp.estgf.nnmusicdroid.adapter.TrackAdapter;
 import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
 import pt.ipp.estgf.nnmusicdroid.tasks.MusicTask;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 import java.util.ArrayList;
 

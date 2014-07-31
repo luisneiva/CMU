@@ -93,6 +93,4 @@ public class MyCountriesActivity extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

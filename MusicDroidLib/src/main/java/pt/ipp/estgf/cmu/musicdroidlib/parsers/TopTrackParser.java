@@ -37,7 +37,7 @@ public class TopTrackParser extends DefaultParser {
 		Place mPlace = Place.get(place_id, db);
 		TopTrack.deleteAllForPlace(place_id, db);
 	
-		request(GETTOPTRACKS_URL + mPlace.getName(), this);
+		request(GETTOPTRACKS_URL + mPlace.getName().replace(" ", "%20"), this);
 		
 		return isStatusOk;
 	}

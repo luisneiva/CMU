@@ -38,7 +38,7 @@ public class TopArtistParser extends DefaultParser {
 		Place mPlace = Place.get(place_id, db);
 		TopArtist.deleteAllForPlace(place_id, db);
 	
-		request(GETTOPARTISTS_URL + mPlace.getName(), this);
+		request(GETTOPARTISTS_URL + mPlace.getName().replace(" ", "%20"), this);
 		
 		return isStatusOk;
 	}

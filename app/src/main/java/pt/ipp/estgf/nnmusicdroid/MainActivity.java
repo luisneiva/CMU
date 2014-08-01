@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.security.Signature;
+
 public class MainActivity extends ActionBarActivity {
 
     public static Context globalContext;
@@ -30,8 +32,12 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 //Abre a activity Music
                 Intent intent = new Intent(MainActivity.this, MyCountriesActivity.class);
-                intent.putExtra("musicas", 1);
-                startActivity(intent);
+
+                intent.putExtra("id", "musica");
+
+                // Lança a Activity
+                MainActivity.this.startActivity(intent);
+
             }
         });
 
@@ -44,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View view){
                 //abre a activity artist
                 Intent intent = new Intent(MainActivity.this, MyCountriesActivity.class);
-                intent.putExtra("artistas", 2);
+                intent.putExtra("id", "artista");
                 startActivity(intent);
             }
         });

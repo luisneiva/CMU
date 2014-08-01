@@ -2,6 +2,8 @@ package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.ListActivity;
 import android.database.sqlite.SQLiteDatabase;
+
+import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.cmu.musicdroidlib.TopArtist;
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
 import pt.ipp.estgf.nnmusicdroid.adapter.ArtistAdapter;
@@ -11,6 +13,7 @@ import pt.ipp.estgf.nnmusicdroid.tasks.ArtistTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,7 @@ public class ArtistListActivity extends ListActivity {
     private ArtistAdapter artistAdapter = null;
     private ArrayList<TopArtist> topArtists = new ArrayList<TopArtist>();
 
-    private Long placeID;
+    private Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,25 @@ public class ArtistListActivity extends ListActivity {
         setListAdapter(artistAdapter);
 
         //Obtem o id do place a mostrar
-        this.placeID = getIntent().getLongExtra("id", -1);
+        long placeID = getIntent().getLongExtra("id", -1);
+
+        //Instancia o DBHelper
+        this.dbHelper = new DatabaseHelper(getApplicationContext());
+
+        //Obtém o place
+        this.place = Place.get(placeID, this.dbHelper.getReadableDatabase());
+
+        //Atualiza a view dos dados
+        updateViewData();
+    }
+
+    private void updateViewData(){
+        TextView titulo = (TextView)findViewById(R.id.title);
+        titulo.setText(this.place.getName());
     }
 
 
     private void reloadListArtists(){
-        this.dbHelper = new DatabaseHelper(getApplicationContext());
 
         ArtistTask task = new ArtistTask(new BasicHandler() {
             @Override
@@ -57,14 +73,14 @@ public class ArtistListActivity extends ListActivity {
         });
 
         //Inicia a Task
-        task.execute(this.placeID);
+        task.execute(this.place.getId());
 
         this.updateList();
     }
 
     private void updateList(){
         //Carrega os topArtists de um place
-        TopArtist.getForPlace(this.placeID, topArtists, dbHelper.getReadableDatabase());
+        TopArtist.getForPlace(this.place.getId(), topArtists, dbHelper.getReadableDatabase());
 
         //Notifica o adapter que os dados foram alterados
         this.artistAdapter.notifyDataSetChanged();

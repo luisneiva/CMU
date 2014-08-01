@@ -19,7 +19,7 @@
             android:textColor="#FFFFFF"
             android:textSize="36sp"
             android:textStyle="bold"
-            android:text="@string/app_name"
+            android:text="@string/country"
             />
 
 
@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:textColor="#FFFFFF"
-            android:text="@string/top_Tracks"
+            android:text="@string/top_Artists"
             android:textSize="28sp"
             android:textStyle="bold"
             android:gravity="center"/>

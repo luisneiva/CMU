@@ -2,6 +2,8 @@ package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.ListActivity;
 import android.database.sqlite.SQLiteDatabase;
+
+import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
 import pt.ipp.estgf.nnmusicdroid.adapter.TrackAdapter;
@@ -11,6 +13,7 @@ import pt.ipp.estgf.nnmusicdroid.tasks.MusicTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -22,8 +25,7 @@ public class MusicListActivity extends ListActivity {
     private TrackAdapter trackAdapter = null;
     private ArrayList<TopTrack> topTrack = new ArrayList<TopTrack>();
 
-    private long placeID;
-
+    private Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,25 @@ public class MusicListActivity extends ListActivity {
         setListAdapter(trackAdapter);
 
         // Obtem o id do place a mostrar
-        this.placeID = getIntent().getLongExtra("id", -1);
+        long placeID = getIntent().getLongExtra("id", -1);
+
+        // Instancia o DbHelper
+        this.dbHelper = new DatabaseHelper(getApplicationContext());
+
+        // Obtem o place
+        this.place = Place.get(placeID, this.dbHelper.getReadableDatabase());
+
+
+        // Atualiza a view com os dados
+        updateViewData();
+    }
+
+    private void updateViewData() {
+        TextView titulo = (TextView)findViewById(R.id.title);
+        titulo.setText(this.place.getName());
     }
 
     private void reloadListTracks(){
-        this.dbHelper = new DatabaseHelper(getApplicationContext());
-
         MusicTask task = new MusicTask(new BasicHandler() {
             @Override
             public void run() {
@@ -57,14 +72,14 @@ public class MusicListActivity extends ListActivity {
         });
 
         // Inicia a task
-        task.execute(this.placeID);
+        task.execute(this.place.getId());
 
         this.updateList();
     }
 
     private void updateList() {
         // Carrega as top tracks de um place
-        TopTrack.getForPlace(this.placeID, topTrack, dbHelper.getReadableDatabase());
+        TopTrack.getForPlace(this.place.getId(), topTrack, dbHelper.getReadableDatabase());
 
         // Notifica o adpater que os dados foram alterados
         this.trackAdapter.notifyDataSetChanged();

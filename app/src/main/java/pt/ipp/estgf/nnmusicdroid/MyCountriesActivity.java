@@ -39,10 +39,11 @@ public class MyCountriesActivity extends ListActivity {
         // Obtem a lista
         ListView listView = this.getListView();
 
-        String sinal = getIntent().getStringExtra("musicas");
 
+        //Cria o intent
+        String m = getIntent().getStringExtra("id");
 
-        if (sinal == "musicas") {
+        if (m.equals("musica")) {
 
             // Adiciona o evento do click
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,7 +62,7 @@ public class MyCountriesActivity extends ListActivity {
                     MyCountriesActivity.this.startActivity(intent);
                 }
             });
-        }else {
+        } else {
             // Adiciona o evento do click
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -80,25 +81,6 @@ public class MyCountriesActivity extends ListActivity {
                 }
             });
         }
-
-
-        // Adiciona o evento do click
-        //listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //    @Override
-        //    public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
-        //        // Obtem o place para esta posição
-        //        Place place = MyCountriesActivity.this.placesList.get(index);
-        //
-                // Cria o intent
-        //        Intent intent = new Intent(MainActivity.globalContext, ArtistListActivity.class);
-
-                // Adiciona o id do place
-        //        intent.putExtra("id", place.getId());
-
-                // Lança a Activity
-        //        MyCountriesActivity.this.startActivity(intent);
-        //    }
-        //});
     }
 
     private void reloadListCountries(){

@@ -52,6 +52,14 @@ public class ArtistDetails extends ActionBarActivity {
         //Lista a imagem do artista
         ImageView image = (ImageView)findViewById(R.id.artist_image);
         new ImageLoaderTask(image).execute(this.artist.getImageMedium());
+
+        //Lista o URL do artista
+        TextView url = (TextView)findViewById(R.id.artist_url);
+        url.setText(this.artist.getUrl());
+
+        //Lista o sumário do artista
+        TextView sumario = (TextView)findViewById(R.id.artist_summary);
+        sumario.setText(this.artist.getSummary());
     }
 
 

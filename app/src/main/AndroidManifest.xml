@@ -4,6 +4,21 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- - Network State -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- - Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--  Permission for ACCESS_FINE_LOCATION-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- - Permission to read GSF -->
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <!-- Feature Requirement -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -36,13 +51,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.ListActivity" />
         </activity>
-        <activity android:name=".MapActivity" />
+
         <activity android:name=".MusicActivity" />
         <activity android:name=".MusicListActivity" />
         <activity android:name=".ArtistDetails" />
         <activity
             android:name=".MusicDetails"
-            android:label="@string/title_activity_music_details" >
+            android:label="@string/title_activity_music_details" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAGweooG4WeLNuuPamryNjBQ58-0SJ2eyc" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map" >
         </activity>
     </application>
 

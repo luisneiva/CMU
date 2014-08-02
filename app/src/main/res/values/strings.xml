@@ -39,5 +39,8 @@
     <string name="name_artist1">name_artist1</string>
     <string name="music_duration1">music_duration1</string>
     <string name="music_summary1">music_summary1</string>
+    <string name="url">artist_url</string>
+    <string name="sumario">artist_summary</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

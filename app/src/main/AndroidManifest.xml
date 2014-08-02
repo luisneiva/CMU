@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".CountryListActivity"
             android:label="@string/title_activity_country_list"
@@ -26,23 +27,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.ListActivity" />
         </activity>
+
         <activity android:name=".AboutActivity" />
         <activity android:name=".ArtistActivity" />
         <activity android:name=".ArtistListActivity" />
         <activity
             android:name=".MyCountriesActivity"
-            android:parentActivityName="android.app.ListActivity" >
+            android:parentActivityName="android.app.ListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.ListActivity" />
         </activity>
+
         <activity android:name=".MapActivity" />
         <activity android:name=".MusicActivity" />
         <activity android:name=".MusicListActivity" />
         <activity
-            android:name=".ArtistDetails"
-            android:label="@string/artist_title" >
+            android:name=".music_details"
+            android:label="@string/title_activity_music_details" >
         </activity>
+
     </application>
 
 </manifest>

@@ -1,27 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#000000">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="pt.ipp.estgf.nnmusicdroid.MapActivity">
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/map"
+        android:layout_below="@+id/buttonMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#0000A0"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="10dip"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:text="@string/app_name"
-            />
-
-    </LinearLayout>
+        class="com.google.android.gms.maps.SupportMapFragment"/>
 
 </LinearLayout>

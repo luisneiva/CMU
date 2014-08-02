@@ -29,7 +29,7 @@ public class Artist {
 		this.image_large = image_large;
 
 		this.similar_artists = similar_artists;
-		this.tags = tags;
+        this.tags = tags;
 		
 		this.summary = summary;		
 	}

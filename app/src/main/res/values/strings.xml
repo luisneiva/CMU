@@ -28,7 +28,8 @@
     <string name="artist_title">Artista</string>
     <string name="details">Detalhes</string>
     <string name="image">Imagem</string>
-
-
+    <string name="url">artist_url</string>
+    <string name="sumario">artist_summary</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

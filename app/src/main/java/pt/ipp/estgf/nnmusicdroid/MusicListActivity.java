@@ -8,7 +8,7 @@ import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
 import pt.ipp.estgf.nnmusicdroid.adapter.TrackAdapter;
 import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
-import pt.ipp.estgf.nnmusicdroid.tasks.MusicTask;
+import pt.ipp.estgf.nnmusicdroid.tasks.TopMusicTask;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,7 +58,7 @@ public class MusicListActivity extends ListActivity {
     }
 
     private void reloadListTracks(){
-        MusicTask task = new MusicTask(new BasicHandler() {
+        TopMusicTask task = new TopMusicTask(new BasicHandler() {
             @Override
             public void run() {
                 // Faz com que o codigo a seguir seja executado na UIThread

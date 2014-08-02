@@ -2,14 +2,15 @@ package pt.ipp.estgf.nnmusicdroid.tasks;
 
 import android.os.AsyncTask;
 
-import pt.ipp.estgf.cmu.musicdroidlib.parsers.TopTrackParser;
+import pt.ipp.estgf.cmu.musicdroidlib.Artist;
+import pt.ipp.estgf.cmu.musicdroidlib.parsers.TopArtistParser;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 
-public class MusicTask extends AsyncTask<Long, Void, Void> {
+public class TopArtistTask extends AsyncTask<Long, Void, Void> {
 
     private BasicHandler handler;
 
-    public MusicTask(BasicHandler handler) {
+    public TopArtistTask(BasicHandler handler) {
         this.handler = handler;
     }
 
@@ -19,8 +20,8 @@ public class MusicTask extends AsyncTask<Long, Void, Void> {
 
         // Atualiza a base de dados
         // TODO: É necessario limitar o numero de chamadas à API
-        TopTrackParser topTrackParser = new TopTrackParser(myDbAccess.getWritableDatabase());
-        topTrackParser.getTopTracks(placeID[0]);
+        TopArtistParser topArtistParser = new TopArtistParser(myDbAccess.getWritableDatabase());
+        topArtistParser.getTopArtists(placeID[0]);
 
         // Executar o handler
         if (this.handler != null) {
@@ -30,3 +31,4 @@ public class MusicTask extends AsyncTask<Long, Void, Void> {
         return null;
     }
 }
+

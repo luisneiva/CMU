@@ -1,18 +1,19 @@
 package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-
-import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.cmu.musicdroidlib.TopArtist;
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
 import pt.ipp.estgf.nnmusicdroid.adapter.ArtistAdapter;
 import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
-import pt.ipp.estgf.nnmusicdroid.tasks.ArtistTask;
+import pt.ipp.estgf.nnmusicdroid.tasks.TopArtistTask;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class ArtistListActivity extends ListActivity {
 
     private void reloadListArtists(){
 
-        ArtistTask task = new ArtistTask(new BasicHandler() {
+        TopArtistTask task = new TopArtistTask(new BasicHandler() {
             @Override
             public void run() {
                 //Faz com que o código a seguir seja executado na UIthread
@@ -84,6 +85,20 @@ public class ArtistListActivity extends ListActivity {
 
         //Notifica o adapter que os dados foram alterados
         this.artistAdapter.notifyDataSetChanged();
+    }
+
+    //FEITO POR NUNO A 01-08-14
+    //click para passar para os detalhes do artista
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Intent intent = new Intent(ArtistListActivity.this, ArtistDetails.class);
+        TopArtist topArtist = this.topArtists.get(position);
+        intent.putExtra("ID", topArtist.getArtistName());
+
+        // Lança a Activity
+        ArtistListActivity.this.startActivity(intent);
     }
 
     @Override

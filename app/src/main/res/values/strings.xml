@@ -25,5 +25,6 @@
     <string name="top_Artists">Top de Artistas</string>
     <string name="lista_vazia">Vazia</string>
     <string name="country">country</string>
+    <string name="title_activity_music_details">music_details</string>
 
 </resources>

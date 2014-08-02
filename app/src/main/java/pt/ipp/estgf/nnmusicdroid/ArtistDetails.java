@@ -1,20 +1,16 @@
 package pt.ipp.estgf.nnmusicdroid;
 
-import android.media.Image;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Artist;
-import pt.ipp.estgf.nnmusicdroid.R;
 import pt.ipp.estgf.nnmusicdroid.tasks.ArtistDetailTask;
 import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
-import pt.ipp.estgf.nnmusicdroid.tasks.ImageDetailArtist;
+import pt.ipp.estgf.nnmusicdroid.tasks.ImageLoaderTask;
 
 public class ArtistDetails extends ActionBarActivity {
 
@@ -55,7 +51,7 @@ public class ArtistDetails extends ActionBarActivity {
 
         //Lista a imagem do artista
         ImageView image = (ImageView)findViewById(R.id.artist_image);
-        new ImageDetailArtist(image).execute(this.artist.getImageMedium());
+        new ImageLoaderTask(image).execute(this.artist.getImageMedium());
     }
 
 

@@ -1,6 +1,7 @@
 package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
@@ -13,6 +14,8 @@ import pt.ipp.estgf.nnmusicdroid.tasks.MusicTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -56,6 +59,22 @@ public class MusicListActivity extends ListActivity {
         TextView titulo = (TextView)findViewById(R.id.title);
         titulo.setText(this.place.getName());
     }
+
+    //Clique para passar para os detalhes da musica
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id){
+        super.onListItemClick(l, v, position, id);
+
+        Intent intent = new Intent(MusicListActivity.this, MusicDetails.class);
+        TopTrack topTrack = this.topTrack.get(position);
+
+        intent.putExtra("ArtistName", topTrack.getArtistName());
+        intent.putExtra("TrackName", topTrack.getName());
+
+        //Lança a Activity
+        MusicListActivity.this.startActivity(intent);
+    }
+
 
     private void reloadListTracks(){
         MusicTask task = new MusicTask(new BasicHandler() {

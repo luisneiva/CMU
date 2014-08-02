@@ -28,7 +28,16 @@
     <string name="artist_title">Artista</string>
     <string name="details">Detalhes</string>
     <string name="image">Imagem</string>
-
-
+    <string name="title_activity_music_details">music_details</string>
+    <string name="music_title">musica</string>
+    <string name="album_name">Nome Album --> </string>
+    <string name="name_artist">Nome Artista --> </string>
+    <string name="music_duration">Duração --> </string>
+    <string name="music_url">music_url</string>
+    <string name="music_summary">Sumário:</string>
+    <string name="album_name1">album_name1</string>
+    <string name="name_artist1">name_artist1</string>
+    <string name="music_duration1">music_duration1</string>
+    <string name="music_summary1">music_summary1</string>
 
 </resources>

@@ -11,11 +11,11 @@ import java.io.InputStream;
 /**
  * Created by sio on 01-08-2014.
  */
-public class ImageDetailArtist extends AsyncTask<String, Void, Bitmap> {
+public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap> {
 
     ImageView bmImage;
 
-    public ImageDetailArtist(ImageView bmImage) {
+    public ImageLoaderTask(ImageView bmImage) {
         this.bmImage = bmImage;
     }
 

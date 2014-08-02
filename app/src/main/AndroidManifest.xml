@@ -42,6 +42,7 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".MusicActivity" />
         <activity android:name=".MusicListActivity" />
+        <activity android:name=".ArtistDetails" />
     </application>
 
 </manifest>

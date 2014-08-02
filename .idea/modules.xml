@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MusicDroidLib/MusicDroidLib.iml" filepath="$PROJECT_DIR$/MusicDroidLib/MusicDroidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/NNMusicDroid.iml" filepath="$PROJECT_DIR$/NNMusicDroid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Projeto.iml" filepath="$PROJECT_DIR$/Projeto.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

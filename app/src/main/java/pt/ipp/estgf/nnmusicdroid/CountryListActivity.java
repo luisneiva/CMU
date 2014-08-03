@@ -73,7 +73,7 @@ public class CountryListActivity extends ListActivity {
                 builder1.setMessage("Adicionar o País selecionado à sua lista?");
                 builder1.setCancelable(false);
 
-                builder1.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                builder1.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int whish) {
                         // Obtem as coordenadas
@@ -97,7 +97,7 @@ public class CountryListActivity extends ListActivity {
                     }
                 });
 
-                builder1.setNegativeButton("No", new DialogInterface.OnClickListener(){
+                builder1.setNegativeButton("Não", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialogInterface, int wish){
                         dialogInterface.cancel();
                     }

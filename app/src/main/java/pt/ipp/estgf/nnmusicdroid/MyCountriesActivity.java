@@ -1,15 +1,19 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import java.security.Key;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.nnmusicdroid.adapter.PlaceAdapter;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
+import pt.ipp.estgf.nnmusicdroid.model.Country;
 
 public class MyCountriesActivity extends ListActivity {
 
@@ -40,7 +45,6 @@ public class MyCountriesActivity extends ListActivity {
         // Obtem a lista
         ListView listView = this.getListView();
 
-
         //Cria o intent
         String m = getIntent().getStringExtra("id");
 
@@ -49,7 +53,7 @@ public class MyCountriesActivity extends ListActivity {
             // Adiciona o evento do click
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                public void onItemClick(AdapterView<?> adapterView, final View view, final int index, final long l) {
                     // Obtem o place para esta posição
                     Place place = MyCountriesActivity.this.placesList.get(index);
 
@@ -67,7 +71,7 @@ public class MyCountriesActivity extends ListActivity {
             // Adiciona o evento do click
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                public void onItemClick(AdapterView<?> adapterView, final View view, final int index, final long l) {
                     // Obtem o place para esta posição
                     Place place = MyCountriesActivity.this.placesList.get(index);
 
@@ -83,6 +87,50 @@ public class MyCountriesActivity extends ListActivity {
             });
         }
 
+        //Define o handler para o longPress
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, final View view, final int index, final long l) {
+                //Obtem o plave para a posição
+                final Place place = MyCountriesActivity.this.placesList.get(index);
+
+                //Questionar e eliminar o pais selecionado
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyCountriesActivity.this);
+                builder.setMessage("Emilinar o país selecionado da sua lista?");
+                builder.setCancelable(false);
+
+                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int whish) {
+
+                        try {
+                            //Elimina o Place
+                            MyDbAccess myDbAccess1 = new MyDbAccess();
+                            Place.delete(place.getId(), myDbAccess1.getWritableDatabase());
+
+                            //Mensagem de confirmação do pais eliminado
+                            Toast.makeText(MyCountriesActivity.this, ""  + "País eliminado com sucesso!",Toast.LENGTH_LONG).show();
+
+                            reloadListCountries();
+                        }catch (Exception ex){
+                            Log.d("MyCountriesActivity", ex.getMessage());
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("Não", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialogInterface, int wish){
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+                return false;
+            }
+        });
+
         //obter o id do xml da activity Country list activity
         Button button_list_Countries = (Button) findViewById(R.id.button_AddCountry);
 
@@ -95,6 +143,8 @@ public class MyCountriesActivity extends ListActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void reloadListCountries(){

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -81,6 +82,19 @@ public class MyCountriesActivity extends ListActivity {
                 }
             });
         }
+
+        //obter o id do xml da activity Country list activity
+        Button button_list_Countries = (Button) findViewById(R.id.button_AddCountry);
+
+        //Adicionar i Listner ao botão addPais
+        button_list_Countries.setOnClickListener(new View.OnClickListener(){
+            @Override
+                    public void onClick(View view){
+                //Abrir a activity da lista de paises
+                Intent intent = new Intent(MyCountriesActivity.this, CountryListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void reloadListCountries(){

@@ -16,7 +16,7 @@
     <string name="title_activity_countries">countries</string>
     <string name="title_activity_artists">artists</string>
     <string name="title_activity_country_list">countryList</string>
-    <string name="my_countries">myCountries</string>
+    <string name="my_countries">Meus Países</string>
     <string name="title_activity_map">map</string>
     <string name="title_activity_artist_list">ArtistListActivity</string>
     <string name="title_activity_music_list">MusicListActivity</string>
@@ -50,5 +50,6 @@
     <string name="url">artist_url</string>
     <string name="sumario">artist_summary</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="all_countries">Países</string>
 
 </resources>

@@ -27,6 +27,14 @@
     <string name="country">country</string>
     <string name="artist_title">Artista</string>
     <string name="details">Detalhes</string>
+
+    <string name="about">About</string>
+    <string name="version">Version 1.0</string>
+    <string name="developers">developers</string>
+    <string name="nuno">Nuno Nunes</string>
+    <string name="miguel">Luis Neiva</string>
+    <string name="description">Descrição</string>
+
     <string name="image">Imagem</string>
     <string name="title_activity_music_details">music_details</string>
     <string name="music_title">musica</string>

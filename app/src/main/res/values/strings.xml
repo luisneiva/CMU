@@ -34,6 +34,10 @@
     <string name="nuno">Nuno Nunes</string>
     <string name="miguel">Luis Neiva</string>
     <string name="description">Descrição</string>
+    <string name="description1">Aplicação que mostra os TOPs de Músicas ou de Artistas do País
+        selecionado pelo utilizador, contém ainda uma mapa que mostra um marker com os TOPs dos
+        países que o utilizador tem nos "Meus Países". </string>
+
 
     <string name="image">Imagem</string>
     <string name="title_activity_music_details">music_details</string>

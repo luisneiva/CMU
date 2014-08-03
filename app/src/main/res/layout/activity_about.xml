@@ -32,7 +32,7 @@
             android:gravity="center"
             android:text="@string/version"
             android:textColor="#FFFFFF"
-            android:textSize="36sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
         <TextView
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:text="@string/developers"
             android:textColor="#FFFFFF"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
@@ -78,7 +78,21 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/description"
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/description"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -86,7 +100,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@string/description"
+            android:text="@string/description1"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold" />

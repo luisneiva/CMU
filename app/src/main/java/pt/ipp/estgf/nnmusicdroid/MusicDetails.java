@@ -2,6 +2,7 @@ package pt.ipp.estgf.nnmusicdroid;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -68,6 +69,7 @@ public class MusicDetails extends ActionBarActivity {
         //Detalhes - URL
         TextView url = (TextView) findViewById(R.id.music_url);
         url.setText(track.getUrl());
+        Linkify.addLinks(url, Linkify.ALL);
 
         //Detalhes - duração da musica
         TextView musicDuration = (TextView) findViewById(R.id.music_duration);

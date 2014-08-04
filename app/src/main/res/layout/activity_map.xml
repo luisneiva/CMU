@@ -2,13 +2,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context="pt.ipp.estgf.nnmusicdroid.MapActivity">
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/myMap"
         android:layout_below="@+id/buttonMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <Button
+        android:id="@+id/button_mapa_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="onClick_Normal"/>
+
+    <Button
+        android:id="@+id/button_mapa_terrestre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="onClick_Terrain"/>
+
+    <Button
+        android:id="@+id/button_mapa_stalite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="onClick_Satellite"/>
+
+    <Button
+        android:id="@+id/button_mapa_hibrido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="onClick_Hybrid"/>
+
 
 </LinearLayout>

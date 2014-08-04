@@ -2,6 +2,7 @@ package pt.ipp.estgf.nnmusicdroid;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -51,11 +52,12 @@ public class ArtistDetails extends ActionBarActivity {
 
         //Lista a imagem do artista
         ImageView image = (ImageView)findViewById(R.id.artist_image);
-        new ImageLoaderTask(image).execute(this.artist.getImageMedium());
+        new ImageLoaderTask(image).execute(this.artist.getImageLarge());
 
         //Lista o URL do artista
         TextView url = (TextView)findViewById(R.id.artist_url);
         url.setText(this.artist.getUrl());
+        Linkify.addLinks(url, Linkify.ALL);
 
         //Lista o sumário do artista
         TextView sumario = (TextView)findViewById(R.id.artist_summary);

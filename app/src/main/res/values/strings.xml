@@ -51,9 +51,11 @@
     <string name="name_artist1">name_artist1</string>
     <string name="music_duration1">music_duration1</string>
     <string name="music_summary1">music_summary1</string>
-    <string name="url">artist_url</string>
-    <string name="sumario">artist_summary</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="artist_url">artist_url</string>
+    <string name="artist_sumario">Sumário:</string>
+    <string name="artist_sumario1">artist_summary1</string>
+
     <string name="all_countries">Países</string>
 
 </resources>

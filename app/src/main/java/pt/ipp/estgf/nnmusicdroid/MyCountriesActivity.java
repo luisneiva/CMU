@@ -127,7 +127,7 @@ public class MyCountriesActivity extends ListActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
 
-                return false;
+                return true;
             }
         });
 

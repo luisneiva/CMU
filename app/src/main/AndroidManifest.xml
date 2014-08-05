@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- - Permission to write to external storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--  Permission for ACCESS_FINE_LOCATION-->
+    <!-- Permission for ACCESS_FINE_LOCATION -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- - Permission to read GSF -->
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -51,7 +51,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.ListActivity" />
         </activity>
-
         <activity android:name=".MusicActivity" />
         <activity android:name=".MusicListActivity" />
         <activity android:name=".ArtistDetails" />
@@ -69,6 +68,10 @@
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map" >
+        </activity>
+        <activity
+            android:name=".Top5MusicsArtists"
+            android:label="@string/title_activity_top5_musics_artists" >
         </activity>
     </application>
 

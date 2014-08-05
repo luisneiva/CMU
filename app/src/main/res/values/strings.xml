@@ -27,7 +27,6 @@
     <string name="country">country</string>
     <string name="artist_title">Artista</string>
     <string name="details">Detalhes</string>
-
     <string name="about">About</string>
     <string name="version">Version 1.0</string>
     <string name="developers">developers</string>
@@ -37,8 +36,6 @@
     <string name="description1">Aplicação que mostra os TOPs de Músicas ou de Artistas do País
         selecionado pelo utilizador, contém ainda uma mapa que mostra um marker com os TOPs dos
         países que o utilizador tem nos "Meus Países". </string>
-
-
     <string name="image">Imagem</string>
     <string name="title_activity_music_details">music_details</string>
     <string name="music_title">musica</string>
@@ -51,11 +48,11 @@
     <string name="name_artist1">name_artist1</string>
     <string name="music_duration1">music_duration1</string>
     <string name="music_summary1">music_summary1</string>
-
     <string name="artist_url">artist_url</string>
     <string name="artist_sumario">Sumário:</string>
     <string name="artist_sumario1">artist_summary1</string>
-
     <string name="all_countries">Países</string>
+    <string name="title_activity_top5_musics_artists">Top5MusicsArtists</string>
+
 
 </resources>

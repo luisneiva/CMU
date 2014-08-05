@@ -81,14 +81,14 @@ public class MapActivity extends FragmentActivity {
             mMap.moveCamera(CameraUpdateFactory
                     .newLatLngZoom(LOCATION_EUROPE, 3));
 
-            //Método que mostra o Top de músicas do marker seleccionado
+            //Método que mostra o Top de músicas do marker seleccionado (setOnWindow)
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     //Obtem o ID do plce que está na hashMap Markers
                     Long placeID = MapActivity.this.markers.get(marker.getId());
 
-                    Intent intent = new Intent(MapActivity.this, MusicListActivity.class);
+                    Intent intent = new Intent(MapActivity.this, Top5MusicsArtists.class);
                     intent.putExtra("id", placeID);
                     MapActivity.this.startActivity(intent);
 

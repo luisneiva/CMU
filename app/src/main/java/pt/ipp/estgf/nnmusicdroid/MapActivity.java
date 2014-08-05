@@ -79,7 +79,7 @@ public class MapActivity extends FragmentActivity {
 
             //Metodo para colcoar a câmara a mostrar o centro da europa com aproximação5
             mMap.moveCamera(CameraUpdateFactory
-                    .newLatLngZoom(LOCATION_EUROPE, 5));
+                    .newLatLngZoom(LOCATION_EUROPE, 3));
 
             //Método que mostra o Top de músicas do marker seleccionado
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -123,6 +123,8 @@ public class MapActivity extends FragmentActivity {
      * Método que cria os markers conforme os países que temos nos "Meus Países"
      */
     public void addMarkers(){
+        this.markers.clear();
+        this.mMap.clear();
 
         if(!placesList.isEmpty()){
 
@@ -137,7 +139,7 @@ public class MapActivity extends FragmentActivity {
                 myOptions.title(place.getName());
                 myOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
 
-                mMap.addMarker(myOptions);
+
                 Marker marker = mMap.addMarker(myOptions);
 
                 // Adiciona o id do marker e do place a HashMap

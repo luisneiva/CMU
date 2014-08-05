@@ -8,6 +8,9 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
+import pt.ipp.estgf.nnmusicdroid.MainActivity;
+import pt.ipp.estgf.nnmusicdroid.R;
+
 /**
  * Created by sio on 01-08-2014.
  */
@@ -22,12 +25,12 @@ public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap> {
     protected Bitmap doInBackground(String... urls) {
         String urldisplay = urls[0];
         Bitmap mIcon11 = null;
+
         try {
             InputStream in = new java.net.URL(urldisplay).openStream();
             mIcon11 = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
+            mIcon11 = BitmapFactory.decodeResource(MainActivity.globalContext.getResources(), R.drawable.no_image);
         }
         return mIcon11;
     }

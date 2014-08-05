@@ -21,20 +21,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 
-import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
-import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
-import pt.ipp.estgf.nnmusicdroid.adapter.PlaceAdapter;
-import pt.ipp.estgf.nnmusicdroid.adapter.TrackAdapter;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 
-import org.apache.http.ConnectionReuseStrategy;
-
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
-import pt.ipp.estgf.nnmusicdroid.R;
 
 public class MapActivity extends FragmentActivity {
 
@@ -69,7 +61,7 @@ public class MapActivity extends FragmentActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        mapFragment = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.buttonMap));
+        mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.myMap);
         mMap = mapFragment.getMap();
 
         if (mMap != null) {

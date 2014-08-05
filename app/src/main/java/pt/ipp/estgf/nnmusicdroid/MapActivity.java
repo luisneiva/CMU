@@ -1,6 +1,7 @@
 package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
@@ -20,13 +21,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 
+import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
+import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
 import pt.ipp.estgf.nnmusicdroid.adapter.PlaceAdapter;
+import pt.ipp.estgf.nnmusicdroid.adapter.TrackAdapter;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 
 import org.apache.http.ConnectionReuseStrategy;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.nnmusicdroid.R;
@@ -44,6 +49,9 @@ public class MapActivity extends FragmentActivity {
     ArrayList<Place> placesList = new ArrayList<Place>();
 
     private Place place;
+
+    //HashMap para associar ao marker o id e o place (key-value)
+    HashMap<String, Long> markers = new HashMap<String, Long>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,21 @@ public class MapActivity extends FragmentActivity {
             mMap.moveCamera(CameraUpdateFactory
                     .newLatLngZoom(LOCATION_EUROPE, 5));
 
+            //Método que mostra o Top de músicas do marker seleccionado
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    //Obtem o ID do plce que está na hashMap Markers
+                    Long placeID = MapActivity.this.markers.get(marker.getId());
+
+                    Intent intent = new Intent(MapActivity.this, MusicListActivity.class);
+                    intent.putExtra("id", placeID);
+                    MapActivity.this.startActivity(intent);
+
+                    return false;
+                }
+            });
+
             //Adiciona os markers
             addMarkers();
         }
@@ -104,6 +127,7 @@ public class MapActivity extends FragmentActivity {
     }
 
     /**
+     * Lição 06 - Ficheiro --> 14_mapas_2013_11_01.pdf, página 17
      * Método que cria os markers conforme os países que temos nos "Meus Países"
      */
     public void addMarkers(){
@@ -124,13 +148,15 @@ public class MapActivity extends FragmentActivity {
                 mMap.addMarker(myOptions);
                 Marker marker = mMap.addMarker(myOptions);
 
-                //GoogleMap.setOnMarkerClickListener(OnMarkerClickListener(marker));
+                // Adiciona o id do marker e do place a HashMap
+                this.markers.put(marker.getId(), place.getId());
 
                 // Showing InfoWindow on the GoogleMap
                 marker.showInfoWindow();
             }
         }
     }
+
 
     /**
      * Método que altera o tipo de mapa para NORMAL

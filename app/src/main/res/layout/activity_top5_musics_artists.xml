@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="10dip"
             android:text="@string/country"
             android:textColor="#FFFFFF"
             android:textSize="36sp"
@@ -26,57 +25,51 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/ScrollView01"
+            <TextView
+                android:id="@+id/text_top5_musics"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="@string/top_Tracks"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/text_top5_musics"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="@string/top_Tracks"
-                    android:textColor="#FFFFFF"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
+            <ListView
+                android:id="@+id/top_music_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" />
 
-                <ListView
-                    android:id="@android:id/top5musics"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
+            <TextView
+                android:id="@+id/text_top5_artists"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/top_Artists"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/text_top5_artists"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="@string/top_Artists"
-                    android:textColor="#FFFFFF"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
+            <ListView
+                android:id="@+id/top_artist_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" />
 
-                <ListView
-                    android:id="@android:id/top5artists"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#FFFFFF" />
-
-                <TextView
-                    android:id="@id/empty"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/lista_vazia" />
-            </ScrollView>
+            <TextView
+                android:id="@id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/lista_vazia"
+                android:textColor="#0000A0"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -53,6 +53,7 @@
     <string name="artist_sumario1">artist_summary1</string>
     <string name="all_countries">Países</string>
     <string name="title_activity_top5_musics_artists">Top5MusicsArtists</string>
-
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

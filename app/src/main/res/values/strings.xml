@@ -55,5 +55,6 @@
     <string name="title_activity_top5_musics_artists">Top5MusicsArtists</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="title_activity_preferences">PreferencesActivity</string>
 
 </resources>

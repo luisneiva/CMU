@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="pref_time_update">
+        <item name="10 Minutos"></item>
+        <item name="30 Minutos"></item>
+        <item name="1 Hora"></item>
+        <item name="2 Horas"></item>
+        <item name="3 Horas"></item>
+    </string-array>
+    <string-array name="pref_time_update_values">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+        <item>180</item>
+    </string-array>
+
+</resources>

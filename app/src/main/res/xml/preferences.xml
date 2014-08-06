@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="País">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_atual_location"
+            android:summary="Utilizar o TOP da localização atual"
+            android:title="Localização Atual"/>
+    </PreferenceCategory>
+    <PreferenceScreen android:title="Escolha um país"/>
+
+    <PreferenceCategory android:title="Atualizações">
+        <ListPreference
+            android:key="pref_time_update"
+            android:title="Intervalo de atualização"
+            android:entries="@array/pref_time_update"
+            android:entryValues="@array/pref_time_update_values"
+            android:defaultValue="10"/>
+
+        <SwitchPreference
+            android:title="Notificações"
+            android:key="pref_notifications_not_enable"
+            android:summary="Apresentar notificações quando os top's alteram"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

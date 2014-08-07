@@ -1,21 +1,140 @@
 package pt.ipp.estgf.nnmusicdroid;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.os.Bundle;
 import android.preference.PreferenceScreen;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+
+import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.nnmusicdroid.R;
+import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 
 public class PreferencesActivity extends PreferenceActivity {
+
+    private SQLiteDatabase database;
+    private MyDbAccess myDbAccess;
+    private SupportMapFragment mapFragment;
+    private GoogleMap mMap;
+    private ListPreference prefTimeUpdate;
+
+    private final LatLng LOCATION_DEFAULT = new LatLng(39.654532, -8.238181);
+
+    ArrayList<Place> placesList = new ArrayList<Place>();
+    private ArrayList<String> timeUpdate_item = new ArrayList<String>();
+
+    private Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+
         //setContentView(R.layout.activity_preferences);
+        loadPlaces();
     }
+
+    /**
+     * Métido que faz o load dos Places
+     */
+    private void loadPlaces() {
+        MyDbAccess myDbAccess = new MyDbAccess();
+        SQLiteDatabase dbAccess = myDbAccess.getReadableDatabase();
+        placesList.clear();
+        Place.getAll(placesList, dbAccess);
+
+        // ---
+
+        ListPreference listPreferenceCategory = (ListPreference) findPreference("pref_default_country_key");
+        if (listPreferenceCategory != null) {
+            CharSequence entries[] = new String[placesList.size()];
+            CharSequence entryValues[] = new String[placesList.size()];
+            int i = 0;
+            for (Place place : placesList) {
+                entries[i] = place.getName();
+                entryValues[i] = Integer.toString(i);
+                i++;
+            }
+            listPreferenceCategory.setEntries(entries);
+            listPreferenceCategory.setEntryValues(entryValues);
+        }
+    }
+
+    /**
+     * Método que adiciona os intervalos de atualização da widget
+     */
+    private void PrefTimeUpdateWidget() {
+
+        // adicionar os items
+        timeUpdate_item.clear();
+        if (timeUpdate_item != null) {
+            timeUpdate_item.add("10 Minutos");
+            timeUpdate_item.add("30 Minutos");
+            timeUpdate_item.add("1 Hora");
+            timeUpdate_item.add("2 Hora");
+            timeUpdate_item.add("3 Hora");
+        }
+    }
+
+    /**
+     * Método que altera o tipo de mapa para NORMAL
+     * @param view
+     *//*
+    public void onClick_Normal(View view){
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_DEFAULT);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_DEFAULT, 6));
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        mMap.animateCamera(cameraUpdate);
+    }
+
+    *//**
+     * Método que altera o tipo de mapa para TERRAIN
+     * @param view
+     *//*
+    public void onClick_Terrain(View view){
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_DEFAULT);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_DEFAULT, 6));
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+
+        mMap.animateCamera(cameraUpdate);
+    }
+
+    *//**
+     * Método que altera o tipo de mapa para SATELLITE
+     * @param view
+     *//*
+    public void onClick_Satellite(View view){
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_DEFAULT);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_DEFAULT, 6));
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+        mMap.animateCamera(cameraUpdate);
+    }
+
+    *//**
+     * Método que altera o tipo de mapa para HYBRID
+     * @param view
+     *//*
+    public void onClick_Hybrid(View view){
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_DEFAULT);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_DEFAULT, 6));
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+        mMap.animateCamera(cameraUpdate);
+    }*/
 
 
     @Override

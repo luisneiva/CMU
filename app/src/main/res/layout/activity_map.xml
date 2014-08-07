@@ -29,7 +29,7 @@
         android:onClick="onClick_Terrain"/>
 
     <Button
-        android:id="@+id/button_mapa_stalite"
+        android:id="@+id/button_mapa_satelite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

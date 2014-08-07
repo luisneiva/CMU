@@ -3,18 +3,31 @@
 <resources>
 
     <string-array name="pref_time_update">
-        <item name="10 Minutos"></item>
-        <item name="30 Minutos"></item>
-        <item name="1 Hora"></item>
-        <item name="2 Horas"></item>
-        <item name="3 Horas"></item>
+        <item name="1 Dia">1 Dia</item>
+        <item name="2 Dias">2 Dias</item>
+        <item name="3 Dias">3 Dias</item>
+        <item name="5 Dias">5 Dias</item>
+        <item name="7 Dias">7 Dias</item>
     </string-array>
     <string-array name="pref_time_update_values">
-        <item>10</item>
-        <item>30</item>
-        <item>60</item>
-        <item>120</item>
-        <item>180</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>5</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="pref_map_type">
+        <item name="Normal">Normal</item>
+        <item name="Terrain">Terreno</item>
+        <item name="Satellite">Satelite</item>
+        <item name="Hybrid">Hibrido</item>
+    </string-array>
+    <string-array name="pref_map_type_values">
+        <item>n</item>
+        <item>t</item>
+        <item>s</item>
+        <item>h</item>
     </string-array>
 
 </resources>

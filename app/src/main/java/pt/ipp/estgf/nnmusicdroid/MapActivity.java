@@ -2,7 +2,9 @@ package pt.ipp.estgf.nnmusicdroid;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -37,7 +39,11 @@ public class MapActivity extends FragmentActivity {
     private GoogleMap mMap;
     private AlertDialog onlAlertDialog = null;
     LocationManager mLocationManager;
-    private final LatLng LOCATION_EUROPE = new LatLng(48.136355, 11.584408);
+
+    //Coordenadas de PARIS
+    private final LatLng LOCATION_EUROPE = new LatLng(48.927913136732556, 2.5048828125);
+    //private final LatLng LOCATION_EUROPE = new LatLng(48.136355, 11.584408);
+
     ArrayList<Place> placesList = new ArrayList<Place>();
 
     private Place place;
@@ -68,8 +74,21 @@ public class MapActivity extends FragmentActivity {
             // identifica a nossa localização
             mMap.setMyLocationEnabled(true);
 
-            //Mostra o mapa do tipo normal
-            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            /**
+             * Método que recebe das preferências o tipo de mapa, por defeito é normal
+             */
+            SharedPreferences mMapType = PreferenceManager.getDefaultSharedPreferences(this);
+            String mapType = mMapType.getString("pref_map_type_key","n");
+
+            if (mapType.equals("n")) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            } else if (mapType.equals("t")){
+                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            } else if (mapType.equals("s")){
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            }else if (mapType.equals("h")){
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            }
 
             // Mostra os botões de zoom do mapa
             mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -78,8 +97,7 @@ public class MapActivity extends FragmentActivity {
             mMap.getUiSettings().setCompassEnabled(true);
 
             //Metodo para colcoar a câmara a mostrar o centro da europa com aproximação5
-            mMap.moveCamera(CameraUpdateFactory
-                    .newLatLngZoom(LOCATION_EUROPE, 3));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 4));
 
             //Método que mostra o Top de músicas do marker seleccionado (setOnWindow)
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -151,50 +169,49 @@ public class MapActivity extends FragmentActivity {
         }
     }
 
-
-    /**
+     /**
      * Método que altera o tipo de mapa para NORMAL
      * @param view
      */
     public void onClick_Normal(View view){
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_EUROPE);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 5));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 4));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         mMap.animateCamera(cameraUpdate);
     }
 
-    /**
+     /**
      * Método que altera o tipo de mapa para TERRAIN
      * @param view
      */
     public void onClick_Terrain(View view){
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_EUROPE);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 5));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 4));
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         mMap.animateCamera(cameraUpdate);
     }
 
-    /**
+     /**
      * Método que altera o tipo de mapa para SATELLITE
      * @param view
      */
     public void onClick_Satellite(View view){
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_EUROPE);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 5));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 4));
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
         mMap.animateCamera(cameraUpdate);
     }
 
-    /**
+     /**
      * Método que altera o tipo de mapa para HYBRID
      * @param view
      */
     public void onClick_Hybrid(View view){
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(LOCATION_EUROPE);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 5));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_EUROPE, 4));
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         mMap.animateCamera(cameraUpdate);

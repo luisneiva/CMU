@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="País">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_atual_location_key"
+            android:summary="Utilizar o TOP da localização atual na widget? Se não, esolha outra país abaixo"
+            android:title="Localização Atual"/>
+    </PreferenceCategory>
+
+    <!--<PreferenceScreen android:title="Escolha um país"/>-->
+    <ListPreference
+        android:key="pref_default_country_key"
+        android:title="País para a Widget"
+        android:defaultValue="10"/>
+
+    <PreferenceCategory android:title="Atualizações">
+        <ListPreference
+            android:key="pref_time_update_key"
+            android:title="Intervalo de atualização TOP's"
+            android:entries="@array/pref_time_update"
+            android:entryValues="@array/pref_time_update_values"
+            android:defaultValue="1"/>
+
+        <SwitchPreference
+            android:title="Notificações"
+            android:key="pref_notifications_not_enable_key"
+            android:summary="Apresentar notificações quando os top's alteram?"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Mapa">
+        <ListPreference
+            android:key="pref_map_type_key"
+            android:title="Tipo de Mapa"
+            android:entries="@array/pref_map_type"
+            android:entryValues="@array/pref_map_type_values"
+            android:defaultValue="n"/>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

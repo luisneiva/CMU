@@ -2,6 +2,8 @@ package pt.ipp.estgf.nnmusicdroid;
 
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -111,6 +113,10 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
+            Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
+            startActivity(intent);
+
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,5 +1,6 @@
 package pt.ipp.estgf.nnmusicdroid.dbAccess;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
@@ -20,6 +21,10 @@ public class MyDbAccess extends DatabaseHelper {
      */
     public MyDbAccess() {
         super(MainActivity.globalContext);
+    }
+
+    public MyDbAccess(Context context) {
+        super(context);
     }
 
     @Override

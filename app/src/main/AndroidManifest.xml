@@ -75,15 +75,26 @@
             android:label="@string/title_activity_top5_musics_artists" >
         </activity>
 
-        <receiver android:name=".widget_layout" >
+        <!-- The widget provider -->
+        <receiver android:name=".widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_provider" />
+            <!-- This specifies the widget provider info -->
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_provider" />
         </receiver>
+
+        <!-- The service serving the RemoveViews to the colletion widget -->
+        <service android:name=".widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false"
+            android:grantUriPermissions="true"/>
+
+        <!-- The content provider serving the music top data -->
+        <provider
+            android:authorities="pt.ipp.estgf.nnmusicdroid.widget.provider"
+            android:name=".widget.TopMusicDataProvider" />
     </application>
 
 </manifest>

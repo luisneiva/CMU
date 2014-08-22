@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid.adapter;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +16,21 @@ import java.util.ArrayList;
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.nnmusicdroid.R;
 
+/**
+ * Lição 03, ficheiro: 6_listas_2013_10_11
+ * -- um ADAPTER Permite a gestão de grandes conjuntos de
+ * dados de uma maneira eficiente e escalável.
+ * -- é um objeto que age como um ponte entre um AdapterView
+ * (ListView, Spinner) e os dados subjacentes para esse tipo de View.
+ * -- O Adapter irá fornecer o acesso às várias linhas de dados.
+ */
 public class PlaceAdapter extends ArrayAdapter<Place> {
 
-    // Lista com todos os paises
+    // Lista de paises que estão nos "meus paises"
     private ArrayList<Place> listOfPlaces;
     Context context;
 
+    //Método construtor, slide 10
     public PlaceAdapter(Context context, ArrayList<Place> mlist) {
         super(context, android.R.layout.activity_list_item, mlist);
 
@@ -25,40 +38,27 @@ public class PlaceAdapter extends ArrayAdapter<Place> {
         this.context = context;
     }
 
-    /**
-     * Obtem um pais pela posição.
-     *
-     * @param position
-     * @return
-     */
+    //Método que obtem um país pela sua posição
     @Override
     public Place getItem(int position) {
         return this.listOfPlaces.get(position);
     }
 
-    /**
-     * Obtém o total de paises.
-     *
-     * @return
-     */
+    //Método que obtem o total de paises
     @Override
     public int getCount() {
         return this.listOfPlaces.size();
     }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-
     /**
-     * Otem a view
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
+     @Override
+     public long getItemId(int position) {
+     return position;
+     }
      */
+
+
+    //Método que obtem a view, slide 11
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
@@ -69,7 +69,7 @@ public class PlaceAdapter extends ArrayAdapter<Place> {
 
         }
 
-        // Obtem o place para a posição atual
+        //Obtem o place para a posição atual
         Place place = this.getItem(position);
 
         // Inicialização da interface

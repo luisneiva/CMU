@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid.adapter;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +17,20 @@ import pt.ipp.estgf.nnmusicdroid.model.Country;
 import java.util.ArrayList;
 
 /**
- *
+ * Lição 03, ficheiro: 6_listas_2013_10_11
+ * -- um ADAPTER Permite a gestão de grandes conjuntos de
+ * dados de uma maneira eficiente e escalável.
+ * -- é um objeto que age como um ponte entre um AdapterView
+ * (ListView, Spinner) e os dados subjacentes para esse tipo de View.
+ * -- O Adapter irá fornecer o acesso às várias linhas de dados.
  */
 public class CountryAdapter extends ArrayAdapter<Country> {
 
-    // Lista com todos os paises
+    // Lista de todos os paises
     private ArrayList<Country> listOfCountries;
     Context context;
 
+    //Método construtor, slide 10
     public CountryAdapter(Context context, ArrayList<Country> mlist) {
         super(context, android.R.layout.activity_list_item, mlist);
 
@@ -28,40 +38,27 @@ public class CountryAdapter extends ArrayAdapter<Country> {
         this.context = context;
     }
 
-    /**
-     * Obtem um pais pela posição.
-     *
-     * @param position
-     * @return
-     */
+    //Método que obtem os paises pela sua posição
     @Override
     public Country getItem(int position) {
         return this.listOfCountries.get(position);
     }
 
-    /**
-     * Obtém o total de paises.
-     *
-     * @return
-     */
+    //Método que obtem o total de paises
     @Override
     public int getCount() {
         return this.listOfCountries.size();
     }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-
     /**
-     * Otem a view
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
+     @Override
+     public long getItemId(int position) {
+     return position;
+     }
      */
+
+
+    //Método que obtem a view, slide 11
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
@@ -72,7 +69,7 @@ public class CountryAdapter extends ArrayAdapter<Country> {
 
         }
 
-        // Obtem o country para a posição atual
+        //Obtem o country para a posição atual
         Country country = this.getItem(position);
 
         // Inicialização da interface

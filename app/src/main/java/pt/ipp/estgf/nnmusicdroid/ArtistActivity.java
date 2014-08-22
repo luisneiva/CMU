@@ -1,12 +1,20 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Lição 02, ficheiro: 4_interface_grafica
+ */
 public class ArtistActivity extends ActionBarActivity {
 
+    //Método construtor, slide 4
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +23,7 @@ public class ArtistActivity extends ActionBarActivity {
     }
 
 
+    //Método onCreateOptionsMenu, mostra o ficheiro .xml "artist"
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         

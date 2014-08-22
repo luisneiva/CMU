@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +34,16 @@ import java.util.HashMap;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
 
+/**
+ * Lição 06, ficheiro: 14_mapas_2013_11_01
+ *
+ * -- MAPAS Uma API desenvolvida pela Google que permite utilizar
+ * no sistema operativo Android os mapas do Google Maps
+ *      Esta API faz parte do Google Play Services SDK
+ *
+ * -- Não usamos nenhum fragment, invocamos a tag fragment no ficheiro
+ * .xml que usa a class="com.google.android.gms.maps.SupportMapFragment"
+ */
 public class MapActivity extends FragmentActivity {
 
     private SQLiteDatabase database;
@@ -40,7 +54,7 @@ public class MapActivity extends FragmentActivity {
     private AlertDialog onlAlertDialog = null;
     LocationManager mLocationManager;
 
-    //Coordenadas de PARIS
+    //Coordenadas de PARIS, para o mapa aparecer +/- com o centro da europa à vista
     private final LatLng LOCATION_EUROPE = new LatLng(48.927913136732556, 2.5048828125);
     //private final LatLng LOCATION_EUROPE = new LatLng(48.136355, 11.584408);
 
@@ -51,6 +65,7 @@ public class MapActivity extends FragmentActivity {
     //HashMap para associar ao marker o id e o place (key-value)
     HashMap<String, Long> markers = new HashMap<String, Long>();
 
+    //Método onCreate, que carrega o xml "activity_map"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +74,12 @@ public class MapActivity extends FragmentActivity {
     }
 
     /**
-     * Lição 06, slides 14 Mapas
-     *Método onStart que carrega o mapa inicial, o mapa é do tipo normal,
+     * Método onStart que carrega o mapa inicial, o mapa é do tipo normal,
      * tem os botões do zoom e a bússula ativos, e mostra +/- a localizção
-     * do centro da europa com o zoom5, este zoom pode ir de 1 a 21.
+     * do centro da europa com o zoom5, este zoom pode ir de 1 a 21
+     * conforme indica nos slides.
+     *
+     * slides 12, 13, 14
      */
     @Override
     protected void onStart(){
@@ -137,8 +154,9 @@ public class MapActivity extends FragmentActivity {
     }
 
     /**
-     * Lição 06 - Ficheiro --> 14_mapas_2013_11_01.pdf, página 17
      * Método que cria os markers conforme os países que temos nos "Meus Países"
+     *
+     * slide 17
      */
     public void addMarkers(){
         this.markers.clear();

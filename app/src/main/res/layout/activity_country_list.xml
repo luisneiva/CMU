@@ -23,6 +23,7 @@
             android:textStyle="bold"
             android:gravity="center"/>
 
+        <!-- - Lição 03, ficheiro: 6_listas_2013_10_11 -->
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,16 +24,30 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Lição 03, ficheiro: 6_listas_2013_10_11
+ *
+ * -- LISTAS É um grupo de view que apresenta uma lista através
+ * de uma fonte de dados como um array ou o Cursor, têm layout
+ * próprio e setendem a super class ListActivity
+ *
+ * slide 2
+ */
 public class MusicListActivity extends ListActivity {
 
     private SQLiteDatabase database;
     private TopTrack topTrackAccess;
     private DatabaseHelper dbHelper;
+
+    //Variável para Adapter que coloca cada um dos elementos no layout:
     private TrackAdapter trackAdapter = null;
+
+    //Variável com o ArrayList dos elementos da lista:
     private ArrayList<TopTrack> topTrack = new ArrayList<TopTrack>();
 
     private Place place;
 
+    //Método onCreate, slide 4
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +78,8 @@ public class MusicListActivity extends ListActivity {
         titulo.setText(this.place.getName());
     }
 
-    //Clique para passar para os detalhes da musica
+    //Método onListItemClick para passar para mostrar detalhes da música
+    //seleccionada
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
@@ -76,6 +95,8 @@ public class MusicListActivity extends ListActivity {
     }
 
 
+    //Método reloadArtists, inicia a task MusicListActivity para mostrar
+    //a lista de músicas
     private void reloadListTracks(){
         MusicTask task = new MusicTask(new BasicHandler() {
             @Override
@@ -96,6 +117,7 @@ public class MusicListActivity extends ListActivity {
         this.updateList();
     }
 
+    //Método updateList, carrega os tops de uma place e atualiza a interface
     private void updateList() {
         // Carrega as top tracks de um place
         TopTrack.getForPlace(this.place.getId(), topTrack, dbHelper.getReadableDatabase());
@@ -104,6 +126,8 @@ public class MusicListActivity extends ListActivity {
         this.trackAdapter.notifyDataSetChanged();
     }
 
+    //Método onResume preencher a lista de objetos com os dados
+    //que queremos mostrar:
     @Override
     protected void onResume() {
         super.onResume();

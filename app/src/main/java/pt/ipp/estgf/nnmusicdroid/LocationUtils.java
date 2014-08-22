@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -17,7 +21,13 @@ import java.util.Locale;
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
 
 /**
- * Created by luisteixeira on 06/08/14.
+ * Lição 07, ficheiro: 17_internet_2013_11_08
+ *
+ * -- ConnectivityManager, Serviço responsável por obter o estado da
+ * conectividade à internet. Também tem a capacidade para notificar
+ * as aplicações quando existem alterações no estado da conectividade.
+ *
+ *
  */
 public class LocationUtils {
 
@@ -51,7 +61,7 @@ public class LocationUtils {
      * @return
      */
     public boolean hasInternetCOnnection() {
-        // Obtme o manager responsavel pela conectividade
+        // Obtem o manager responsavel pela conectividade, slide 3
         ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (manager != null) {
@@ -153,6 +163,7 @@ public class LocationUtils {
         Place place = null;
 
         // Geocoder (usado para a morada)
+        //O Geocoding Converte a morada em coordenadas de latitude e longitude
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         Address address = null;
 

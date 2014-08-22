@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -24,11 +28,24 @@ import pt.ipp.estgf.nnmusicdroid.adapter.PlaceAdapter;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 import pt.ipp.estgf.nnmusicdroid.model.Country;
 
+/**
+ * Lição 03, ficheiro: 6_listas_2013_10_11
+ *
+ * -- LISTAS É um grupo de view que apresenta uma lista através
+ * de uma fonte de dados como um array ou o Cursor, têm layout
+ * próprio e setendem a super class ListActivity
+ *
+ * slide 2
+ */
 public class MyCountriesActivity extends ListActivity {
 
     private SQLiteDatabase database;
     private MyDbAccess myDbAccess;
+
+    //Variável para Adapter que coloca cada um dos elementos no layout:
     private PlaceAdapter placeAdapter = null;
+
+    //Variável com o ArrayList dos elementos da lista:
     private ArrayList<Place> placesList = new ArrayList<Place>();
 
     @Override
@@ -147,14 +164,18 @@ public class MyCountriesActivity extends ListActivity {
 
     }
 
+    //Método reloadListCountries, vai à base de dados buscar todos os países
+    //a lista de músicas
     private void reloadListCountries(){
         this.myDbAccess = new MyDbAccess();
         Place.getAll(placesList, this.myDbAccess.getReadableDatabase());
 
-        // Confirmação das alterações no country adapter
+        // Notifica o adpater que os dados foram alterados
         placeAdapter.notifyDataSetChanged();
     }
 
+    //Método onResume preencher a lista de objetos com os dados
+    //que queremos mostrar:
     @Override
     public void onResume(){
         super.onResume();

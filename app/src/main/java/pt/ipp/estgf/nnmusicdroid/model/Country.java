@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid.model;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -54,6 +58,8 @@ public class Country {
     // --------------------------------------------------------------------------------------------
 
     /**
+     * Lição 04, ficheiro: 7_base_dados_2013_10_13
+     *
      * Obtem a lista de paises a partir da base de dados.
      *
      * @param list
@@ -64,14 +70,16 @@ public class Country {
         // Apaga os items da lista
         list.clear();
 
-        // Abre a coneção com o SQL (somente leitura)
+        // Abre a coneção com o SQL (somente leitura(getReadableDatabase))
         mydbHelper = new MyDbAccess();
         db = mydbHelper.getReadableDatabase();
 
         Country country = null;
+
+        //Pesquisa SQL, slide 15
         String query = "SELECT * FROM " + TBL_NAME + " ORDER BY " + NAME;
 
-        // Cria um cursor
+        // Cria um cursor, slide 15
         Cursor c = db.rawQuery(query, null);
 
         // Percorre todos os resultados

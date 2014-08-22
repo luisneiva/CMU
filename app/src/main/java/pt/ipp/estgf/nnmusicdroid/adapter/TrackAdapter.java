@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid.adapter;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +18,20 @@ import pt.ipp.estgf.cmu.musicdroidlib.Track;
 import pt.ipp.estgf.nnmusicdroid.R;
 
 /**
- * Created by luisteixeira on 31/07/14.
+ * Lição 03, ficheiro: 6_listas_2013_10_11
+ * -- um ADAPTER Permite a gestão de grandes conjuntos de
+ * dados de uma maneira eficiente e escalável.
+ * -- é um objeto que age como um ponte entre um AdapterView
+ * (ListView, Spinner) e os dados subjacentes para esse tipo de View.
+ * -- O Adapter irá fornecer o acesso às várias linhas de dados.
  */
 public class TrackAdapter extends ArrayAdapter<TopTrack> {
 
-    //Lista com as musicas que estão no TOP
+    //Lista de musicas que estão no TOP
     private ArrayList<TopTrack> listOfTopTracks;
     Context context;
 
+    //Método construtor, slide 10
     public TrackAdapter(Context context, ArrayList<TopTrack> mlist) {
         super(context, android.R.layout.activity_list_item);
 
@@ -29,26 +39,19 @@ public class TrackAdapter extends ArrayAdapter<TopTrack> {
         this.context = context;
     }
 
-    /**
-     * Obter as musicas pela posição
-     */
-
+    //Método que obtem os músicas pela sua posição
     @Override
     public TopTrack getItem(int id){
         return  this.listOfTopTracks.get(id);
     }
 
-    /**
-     * Obter o totla de musicas
-     */
+    //Método que obtem o total de musicas
     @Override
     public int getCount(){
         return this.listOfTopTracks.size();
     }
 
-    /**
-     * Obtém a view
-     */
+    //Método que obtem a view, slide 11
     @Override
     public View getView(int id, View convertView, ViewGroup parent){
         View v = convertView;
@@ -58,7 +61,8 @@ public class TrackAdapter extends ArrayAdapter<TopTrack> {
 
             v = vi.inflate(R.layout.track_list_item, null);
         }
-        //Obtem a musica para a posição
+
+        //Obtem o topTrack para a posição atual
         TopTrack topTrack = this.getItem(id);
 
         //Inicialização da interface

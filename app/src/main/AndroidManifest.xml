@@ -59,6 +59,7 @@
             android:name=".MusicDetails"
             android:label="@string/title_activity_music_details" />
 
+        <!-- Mapa e Chave Permissão -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAGweooG4WeLNuuPamryNjBQ58-0SJ2eyc" />
@@ -75,6 +76,7 @@
             android:label="@string/title_activity_top5_musics_artists" >
         </activity>
 
+        <!-- Widget -->
         <receiver android:name=".widget_layout" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -84,6 +86,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />
         </receiver>
+
 
         <activity
             android:name=".PreferencesActivity"

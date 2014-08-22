@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -25,14 +29,23 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ * Lição 03, ficheiro: 6_listas_2013_10_11
+ *
+ * -- LISTAS É um grupo de view que apresenta uma lista através
+ * de uma fonte de dados como um array ou o Cursor, têm layout
+ * próprio e setendem a super class ListActivity
+ *
  * Classe para suporte à base de dados
+ *
+ * * slide 2
  */
+
 public class CountryListActivity extends ListActivity {
 
-    // Lista com os paises
+    // Variável com o ArrayList dos elementos da lista:
     private ArrayList<Country> countryList = new ArrayList<Country>();
 
-    // Adapter
+    // Variável para Adapter que coloca cada um dos elementos no layout:
     private CountryAdapter adapter;
 
     @Override

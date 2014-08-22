@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceActivity;
@@ -13,6 +17,9 @@ import android.widget.Button;
 
 import java.security.Signature;
 
+/**
+ * Lição 02, ficheiro: 4_interface_grafica
+ */
 public class MainActivity extends ActionBarActivity {
 
     public static Context globalContext;
@@ -98,6 +105,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    //Método onCreateOptionsMenu, mostra o ficheiro .xml "main"
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         

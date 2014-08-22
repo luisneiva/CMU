@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -13,6 +17,9 @@ import pt.ipp.estgf.nnmusicdroid.tasks.ArtistDetailTask;
 import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
 import pt.ipp.estgf.nnmusicdroid.tasks.ImageLoaderTask;
 
+/**
+ * Lição 02, ficheiro: 4_interface_grafica
+ */
 public class ArtistDetails extends ActionBarActivity {
 
     private ArtistDetailTask task = null;
@@ -23,6 +30,7 @@ public class ArtistDetails extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_details);
 
+        //Obtem o ID do artist através do intent
         String artistName = getIntent().getStringExtra("ID");
 
         task = new ArtistDetailTask(new BasicHandler() {
@@ -41,7 +49,6 @@ public class ArtistDetails extends ActionBarActivity {
         task.execute(artistName);
     }
 
-    //FEITO POR NUNO A 01-08-14
     //Lista os detalhes do Artista
     private void updateViewData() {
         Artist artist = new Artist();
@@ -65,6 +72,7 @@ public class ArtistDetails extends ActionBarActivity {
     }
 
 
+    //Método onCreateOptionsMenu, mostra o ficheiro .xml "artist_details"
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

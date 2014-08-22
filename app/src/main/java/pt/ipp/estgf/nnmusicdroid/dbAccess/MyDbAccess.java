@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid.dbAccess;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.database.sqlite.SQLiteDatabase;
 
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
@@ -9,42 +13,42 @@ import pt.ipp.estgf.nnmusicdroid.R;
 
 
 /**
- * Classe de suporte à base de dados
+ * Lição 04, ficheiro: 7_base_dados_2013_10_13
+ *
+ * -- O Android fornece, nativamente, suporte para base de dados SQLite.
+ * As base de dados apenas podem ser acedidas pela aplicação que a cria,
+ * nunca por aplicações terceiras
+ * -- Para criar/gerir a base de dados deve-se criar uma classe que deve
+ * ser subclasse do SQLiteOpenHelper. Deve-se também fazer override aos
+ * métodos onCreate() e onUpgrade()
  */
 public class MyDbAccess extends DatabaseHelper {
 
+    //Versão da base de dados, slide 4
     private static final int DATABASE_VERSION = 1;
 
-    /**
-     * Constutor
-     */
+    //Método construtor
     public MyDbAccess() {
         super(MainActivity.globalContext);
     }
 
+    //Método onCreate, slide 5
     @Override
     public void onCreate(SQLiteDatabase _db) {
         super.onCreate(_db);
 
-        // Cria a tabela country e inicializa com dados
+        // Cria a tabela country e inicializa a base de dados
         execSQLScript(R.raw.tbl_country, _db);
         initCountry(_db);
     }
 
-    /**
-     * Inicializa a table country com dados.
-     *
-     * @param _db
-     */
+    //Inicializa a table country com dados.
     private void initCountry(SQLiteDatabase _db) {
         execSQLScript(R.raw.tbl_init_country, _db);
     }
 
-    /**
-     * Faz o drop das tabelas.
-     *
-     * @param _db
-     */
+
+    //Faz o drop das tabelas.
     @Override
     protected void dropAll(SQLiteDatabase _db) {
         super.dropAll(_db);

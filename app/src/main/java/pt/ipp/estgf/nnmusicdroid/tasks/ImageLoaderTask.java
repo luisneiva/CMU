@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid.tasks;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -12,7 +16,19 @@ import pt.ipp.estgf.nnmusicdroid.MainActivity;
 import pt.ipp.estgf.nnmusicdroid.R;
 
 /**
- * Created by sio on 01-08-2014.
+ * Lição 07, ficheiro: 16_asynctask_threads_2013_11_08
+ *
+ * -- Em Android, existem pelo menos duas formas de lançarmos
+ * novas linhas de execução paralelas (Threads)
+ *     Classe AsyncTask (abstração que faz parte da API Android)
+ *     Classe Thread (tradicionalmente utilizada em Java)
+ * -- Na AsyncTask o código que executa na nova linha de execução
+ * está no método doInBackground()
+ *
+ * slide 10
+ *
+ * Esta task é para carregar as imagens dos artistas e dos albuns
+ * a partir da API.
  */
 public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap> {
 

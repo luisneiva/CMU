@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.ListPreference;
@@ -22,6 +26,15 @@ import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.nnmusicdroid.R;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 
+/**
+ * Lição 04, ficheiro: 8_preferencias_2013_10_13
+ *
+ * PreferenceActivity, tilizada para modificar o comportamento
+ * das aplicações, Activity -> PreferenceActivity
+ * Ao contrário da Activity, a PreferenceActivity não necessita
+ * de um layout em XML, mas sim de um XML com a especificação das
+ * preferências.
+ */
 public class PreferencesActivity extends PreferenceActivity {
 
     private SQLiteDatabase database;
@@ -46,9 +59,7 @@ public class PreferencesActivity extends PreferenceActivity {
         loadPlaces();
     }
 
-    /**
-     * Métido que faz o load dos Places
-     */
+    //Método que faz o load dos Places
     private void loadPlaces() {
         MyDbAccess myDbAccess = new MyDbAccess();
         SQLiteDatabase dbAccess = myDbAccess.getReadableDatabase();
@@ -80,13 +91,14 @@ public class PreferencesActivity extends PreferenceActivity {
         // adicionar os items
         timeUpdate_item.clear();
         if (timeUpdate_item != null) {
-            timeUpdate_item.add("10 Minutos");
-            timeUpdate_item.add("30 Minutos");
-            timeUpdate_item.add("1 Hora");
-            timeUpdate_item.add("2 Hora");
-            timeUpdate_item.add("3 Hora");
+            timeUpdate_item.add("1 Dia");
+            timeUpdate_item.add("2 Dias");
+            timeUpdate_item.add("3 Dias");
+            timeUpdate_item.add("5 Dias");
+            timeUpdate_item.add("7 Dias");
         }
     }
+
 
     /**
      * Método que altera o tipo de mapa para NORMAL

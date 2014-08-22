@@ -1,5 +1,9 @@
 package pt.ipp.estgf.nnmusicdroid;
 
+/**
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -19,7 +23,9 @@ import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
 import pt.ipp.estgf.nnmusicdroid.tasks.ImageLoaderTask;
 import pt.ipp.estgf.nnmusicdroid.tasks.MusicDetailTask;
 
-
+/**
+ * Lição 02, ficheiro: 4_interface_grafica
+ */
 public class MusicDetails extends ActionBarActivity {
 
     private MusicDetailTask task = null;
@@ -80,6 +86,7 @@ public class MusicDetails extends ActionBarActivity {
         summary.setText(track.getSummary());
     }
 
+    //Método onCreateOptionsMenu, mostra o ficheiro .xml "music_details"
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

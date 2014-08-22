@@ -1,7 +1,11 @@
 package pt.ipp.estgf.nnmusicdroid.other;
 
 /**
- * Created by luisteixeira on 02/08/14.
+ * Created by Luis Teixeira & Nuno Nunes
+ */
+
+/**
+ * COMENTAR!!!
  */
 public class DateTools {
 

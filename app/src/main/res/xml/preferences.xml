@@ -23,11 +23,6 @@
             android:entryValues="@array/pref_time_update_values"
             android:defaultValue="1"/>
 
-        <SwitchPreference
-            android:title="Notificações"
-            android:key="pref_notifications_not_enable_key"
-            android:summary="Apresentar notificações quando os top's alteram?"
-            android:defaultValue="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Mapa">

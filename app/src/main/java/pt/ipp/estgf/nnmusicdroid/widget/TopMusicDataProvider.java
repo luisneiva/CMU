@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
 import pt.ipp.estgf.cmu.musicdroidlib.Track;
+import pt.ipp.estgf.nnmusicdroid.MainActivity;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
+import pt.ipp.estgf.nnmusicdroid.tasks.TopArtistTask;
 
 public class TopMusicDataProvider extends ContentProvider {
 
@@ -39,13 +41,19 @@ public class TopMusicDataProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        // @TODO: Obter o ID do place a mostrar
-        int placeID = 4;
+        // Update data
+        updateData();
+
+        return true;
+    }
+
+    private void updateData() {
+        int placeID = 1;
 
         // Carrega os dados para a lista
         MyDbAccess dbHelper = new MyDbAccess(getContext());
         TopTrack.getForPlace(placeID, topMusics, dbHelper.getReadableDatabase());
-        return true;
+        dbHelper.close();
     }
 
     @Override
@@ -53,19 +61,24 @@ public class TopMusicDataProvider extends ContentProvider {
             String[] selectionArgs, String sortOrder) {
         assert(uri.getPathSegments().isEmpty());
 
-        final MatrixCursor c = new MatrixCursor(new String[]{"Name"});
+        final MatrixCursor c = new MatrixCursor(new String[]{TopTrack.NAME});
 
         for (int i = 0; i < 5; i++) {
-            c.addRow(new Object[]{this.topMusics.get(i).getName()});
+            final TopTrack data = this.topMusics.get(i);
+            c.addRow(new Object[]{data.getName()});
         }
 
         return c;
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection,
-            String[] selectionArgs) {
-        // TODO: Implement this to handle requests to update one or more rows.
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        assert(uri.getPathSegments().size() == 1);
+
+        // Update data
+        updateData();
+
+        getContext().getContentResolver().notifyChange(uri, null);
 
         return 1;
     }

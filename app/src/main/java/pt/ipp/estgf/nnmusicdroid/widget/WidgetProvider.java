@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -55,8 +56,16 @@ public class WidgetProvider extends AppWidgetProvider {
     private static Handler sWorkerQueue;
     private static WidgetDataProviderObserver sDataObserver;
 
+    public WidgetProvider() {
+        // start the worker thread
+        sWorkerThread = new HandlerThread("WidgetProvider-worker");
+        sWorkerThread.start();
+        sWorkerQueue = new Handler(sWorkerThread.getLooper());
+    }
+
     @Override
     public void onEnabled(Context context) {
+        Log.d("WidgetProvider", "onEnabled");
         final ContentResolver r = context.getContentResolver();
 
         if (sDataObserver == null) {
@@ -69,6 +78,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+        Log.d("WidgetProvider", "onReceive");
         final String action = intent.getAction();
 
         if (action.equals(REFRESH_ACTION)) {
@@ -87,6 +97,7 @@ public class WidgetProvider extends AppWidgetProvider {
                         values.put("Name", "---");
                         r.update(uri, values, null, null);
                     }
+
                     r.registerContentObserver(TopMusicDataProvider.CONTENT_URI, true, sDataObserver);
 
                     final AppWidgetManager mgr = AppWidgetManager.getInstance(context);
@@ -105,14 +116,17 @@ public class WidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        Log.d("WidgetProvider", "onUpdate");
         for (int i = 0; i < appWidgetIds.length; i++) {
-            final Intent intent = new Intent(context, WidgetService.class);
+            Intent intent = new Intent(context, WidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-            final RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-            rv.setRemoteAdapter(appWidgetIds[i], R.id.top_music_list, intent);
 
-            //rv.setEmptyView(R.id.top_music_list, R.id.e);
+            RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+            rv.setRemoteAdapter(appWidgetIds[i], R.id.top_music_list, intent);
+            rv.setEmptyView(R.id.top_music_list, android.R.id.empty);
+
+            intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
             appWidgetManager.updateAppWidget(appWidgetIds[i], rv);
         }

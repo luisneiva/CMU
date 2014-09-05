@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -40,6 +41,8 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public void onDestroy() {
+        Log.d("StackRemoteViewsFactory", "onDestroy");
+
         if (mCursor != null) {
             mCursor.close();
         }
@@ -47,26 +50,20 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public int getCount() {
-        return mCursor.getCount();
+        return 5;
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
+        Log.d("StackRemoteViewsFactory", "getViewAt");
         String place_name = "---";
 
         if (mCursor.moveToPosition(position)) {
             place_name = mCursor.getString(0);
         }
 
-        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.id.top_music_list);
+        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
         rv.setTextViewText(R.id.widget_item, place_name);
-
-        // ---
-        final Intent fillInIntent = new Intent();
-        final Bundle extras = new Bundle();
-        extras.putString(WidgetProvider.EXTRA_PLACE_ID, place_name);
-        fillInIntent.putExtras(extras);
-        rv.setOnClickFillInIntent(R.id.widget_item, fillInIntent);
 
         return rv;
     }
@@ -78,7 +75,7 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 2;
     }
 
     @Override
@@ -93,11 +90,24 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public void onDataSetChanged() {
-        // Refresh the cursor
-        if (mCursor != null) {
-            mCursor.close();
-        }
+        Log.d("StackRemoteViewsFactory", "onDataSetChanged");
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                // Refresh the cursor
+                if (mCursor != null) {
+                    mCursor.close();
+                }
 
-        mCursor = mContext.getContentResolver().query(TopMusicDataProvider.CONTENT_URI, null, null, null, null);
+                mCursor = mContext.getContentResolver().query(TopMusicDataProvider.CONTENT_URI, null, null, null, null);
+            }
+        };
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

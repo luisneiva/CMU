@@ -4,6 +4,7 @@ package pt.ipp.estgf.nnmusicdroid.dbAccess;
  * Created by Luis Teixeira & Nuno Nunes
  */
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
@@ -30,6 +31,10 @@ public class MyDbAccess extends DatabaseHelper {
     //Método construtor
     public MyDbAccess() {
         super(MainActivity.globalContext);
+    }
+
+    public MyDbAccess(Context context) {
+        super(context);
     }
 
     //Método onCreate, slide 5

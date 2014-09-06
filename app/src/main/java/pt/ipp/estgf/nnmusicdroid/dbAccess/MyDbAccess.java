@@ -31,7 +31,7 @@ public class MyDbAccess extends DatabaseHelper {
 
     //Método construtor
     public MyDbAccess() {
-        super(MainActivity.globalContext);
+        super(Utils.getContext());
     }
 
     public MyDbAccess(Context context) {

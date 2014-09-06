@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Locale;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
+import pt.ipp.estgf.nnmusicdroid.model.MyPlace;
 
 /**
  * Lição 07, ficheiro: 17_internet_2013_11_08
@@ -159,8 +160,8 @@ public class LocationUtils {
      *
      * @return
      */
-    public Place getCurrentPlace() {
-        Place place = null;
+    public MyPlace getCurrentPlace() {
+        MyPlace place = null;
 
         // Geocoder (usado para a morada)
         //O Geocoding Converte a morada em coordenadas de latitude e longitude
@@ -175,7 +176,7 @@ public class LocationUtils {
                 // Obtem a morada da localização atual
                 address = geocoder.getFromLocation(curLocation.getLatitude(), curLocation.getLongitude(), 1).get(0);
 
-                place = new Place(-1l, address.getCountryName(), (float)curLocation.getLatitude(), (float)curLocation.getLongitude());
+                place = new MyPlace(0l, address.getCountryName(), (float)curLocation.getLatitude(), (float)curLocation.getLongitude());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

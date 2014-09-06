@@ -10,10 +10,12 @@ import android.net.Uri;
 import java.util.ArrayList;
 
 import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
-import pt.ipp.estgf.cmu.musicdroidlib.Track;
-import pt.ipp.estgf.nnmusicdroid.MainActivity;
+import pt.ipp.estgf.nnmusicdroid.LocationUtils;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
-import pt.ipp.estgf.nnmusicdroid.tasks.TopArtistTask;
+import pt.ipp.estgf.nnmusicdroid.model.MyPlace;
+import pt.ipp.estgf.nnmusicdroid.other.Utils;
+import pt.ipp.estgf.nnmusicdroid.tasks.BasicHandler;
+import pt.ipp.estgf.nnmusicdroid.tasks.MusicTask;
 
 public class TopMusicDataProvider extends ContentProvider {
 
@@ -32,7 +34,6 @@ public class TopMusicDataProvider extends ContentProvider {
 
     @Override
     public String getType(Uri uri) {
-        // TODO: Implement this to handle requests for the MIME type of the data
         // at the given URI.
         throw new UnsupportedOperationException("Not yet implemented");
     }
@@ -54,12 +55,35 @@ public class TopMusicDataProvider extends ContentProvider {
     }
 
     private void updateData() {
-        int placeID = 1;
+        MyDbAccess dbHelper = new MyDbAccess(Utils.getContext());
+
+        // Obtem o Place correspondente à localização atual
+        LocationUtils locationUtils = new LocationUtils(getContext());
+        final MyPlace place = locationUtils.getCurrentPlace();
+
+        // Guarda o place na base de dados
+        MyPlace.delete(0l, dbHelper.getWritableDatabase());
+        place.create(dbHelper.getWritableDatabase());
+
+        dbHelper.close();
 
         // Carrega os dados para a lista
-        MyDbAccess dbHelper = new MyDbAccess(getContext());
-        TopTrack.getForPlace(placeID, topMusics, dbHelper.getReadableDatabase());
-        dbHelper.close();
+        //MyDbAccess dbHelper = new MyDbAccess(getContext());
+        //TopTrack.getForPlace(place.getId(), topMusics, dbHelper.getReadableDatabase());
+        //dbHelper.close();
+
+        MusicTask task = new MusicTask(new BasicHandler() {
+            @Override
+            public void run() {
+                // Carrega os dados para a lista
+                MyDbAccess dbHelper = new MyDbAccess(Utils.getContext());
+                TopTrack.getForPlace(place.getId(), topMusics, dbHelper.getReadableDatabase());
+                dbHelper.close();
+            }
+        });
+
+        // Inicia a task
+        task.execute(place.getId());
     }
 
     @Override
@@ -67,7 +91,7 @@ public class TopMusicDataProvider extends ContentProvider {
             String[] selectionArgs, String sortOrder) {
         assert(uri.getPathSegments().isEmpty());
 
-        final MatrixCursor c = new MatrixCursor(new String[]{TopTrack.NAME});
+        final MatrixCursor c = new MatrixCursor(new String[]{TopTrack.NAME, TopTrack.ARTIST_NAME});
 
         for (int i = 0; i < 5; i++) {
             if (this.topMusics.size() <= i) {
@@ -75,7 +99,7 @@ public class TopMusicDataProvider extends ContentProvider {
             }
 
             final TopTrack data = this.topMusics.get(i);
-            c.addRow(new Object[]{data.getName()});
+            c.addRow(new Object[]{data.getName(), data.getArtistName()});
         }
 
         return c;

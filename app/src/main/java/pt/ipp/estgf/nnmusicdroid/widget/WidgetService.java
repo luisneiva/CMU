@@ -1,6 +1,7 @@
 package pt.ipp.estgf.nnmusicdroid.widget;
 
 import android.annotation.TargetApi;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,10 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import pt.ipp.estgf.nnmusicdroid.MusicActivity;
+import pt.ipp.estgf.nnmusicdroid.MusicDetails;
 import pt.ipp.estgf.nnmusicdroid.R;
+import pt.ipp.estgf.nnmusicdroid.other.Utils;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class WidgetService extends RemoteViewsService {
@@ -55,15 +59,25 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public RemoteViews getViewAt(int position) {
-        Log.d("StackRemoteViewsFactory", "getViewAt");
-        String place_name = "---";
+        String musicName = "---";
+        String artistName = "";
 
         if (mCursor.moveToPosition(position)) {
-            place_name = mCursor.getString(0);
+            musicName = mCursor.getString(0);
+            artistName = mCursor.getString(1);
         }
 
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
-        rv.setTextViewText(R.id.widget_item, place_name);
+        rv.setTextViewText(R.id.widget_item, musicName);
+
+        // Cria um intent para lançar a Activity com os detalhes
+        Intent intent = new Intent(Utils.getContext(), MusicDetails.class);
+        intent.putExtra("ArtistName", artistName);
+        intent.putExtra("TrackName", musicName);
+        PendingIntent pendingIntent = PendingIntent.getActivity(Utils.getContext(), 0, intent, 0);
+
+        // Associa o intent a linha
+        rv.setOnClickPendingIntent(R.id.widget_item, pendingIntent);
 
         return rv;
     }

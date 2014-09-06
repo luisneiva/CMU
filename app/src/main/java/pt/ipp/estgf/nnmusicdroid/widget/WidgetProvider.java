@@ -1,6 +1,7 @@
 package pt.ipp.estgf.nnmusicdroid.widget;
 
 import android.annotation.TargetApi;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -19,7 +20,14 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import java.util.UUID;
+
+import pt.ipp.estgf.cmu.musicdroidlib.Place;
+import pt.ipp.estgf.nnmusicdroid.LocationUtils;
+import pt.ipp.estgf.nnmusicdroid.MainActivity;
+import pt.ipp.estgf.nnmusicdroid.MusicListActivity;
 import pt.ipp.estgf.nnmusicdroid.R;
+import pt.ipp.estgf.nnmusicdroid.other.Utils;
 
 /**
  * Notifica todos os widgets quando deteta mudanças.
@@ -121,17 +129,31 @@ public class WidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        Log.d("WidgetProvider", "onUpdate");
         for (int i = 0; i < appWidgetIds.length; i++) {
             Intent intent = new Intent(context, WidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
+            // Obtem o RemoteViews
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+
+            // RemoteView para a lista
             rv.setRemoteAdapter(appWidgetIds[i], R.id.top_music_list, intent);
             rv.setEmptyView(R.id.top_music_list, android.R.id.empty);
 
-            intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+            // Coloca o nome do place
+            // Obtem o Place correspondente à localização atual
+            LocationUtils locationUtils = new LocationUtils(context);
+            Place place = locationUtils.getCurrentPlace();
+            rv.setTextViewText(R.id.appwidget_text, place.getName());
+
+            // Ao clicar no nome do pais abre a aplicação
+            Intent intentOpenMain = new Intent(context, MusicListActivity.class);
+            intentOpenMain.setData(Uri.parse(intentOpenMain.toUri(Intent.URI_INTENT_SCHEME)));
+            intentOpenMain.putExtra("id", 0l);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intentOpenMain, 0);
+            rv.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
+
 
             appWidgetManager.updateAppWidget(appWidgetIds[i], rv);
         }

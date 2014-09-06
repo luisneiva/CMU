@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CMU_Neiva.iml" filepath="$PROJECT_DIR$/CMU_Neiva.iml" />
       <module fileurl="file://$PROJECT_DIR$/MusicDroidLib/MusicDroidLib.iml" filepath="$PROJECT_DIR$/MusicDroidLib/MusicDroidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/NNMusicDroid.iml" filepath="$PROJECT_DIR$/NNMusicDroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/Projeto.iml" filepath="$PROJECT_DIR$/Projeto.iml" />

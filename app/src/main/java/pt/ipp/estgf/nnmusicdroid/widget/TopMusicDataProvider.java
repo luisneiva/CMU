@@ -2,6 +2,7 @@ package pt.ipp.estgf.nnmusicdroid.widget;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
@@ -15,6 +16,8 @@ import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
 import pt.ipp.estgf.nnmusicdroid.tasks.TopArtistTask;
 
 public class TopMusicDataProvider extends ContentProvider {
+
+    public static Context globalContext;
 
     public static final Uri CONTENT_URI = Uri.parse("content://pt.ipp.estgf.nnmusicdroid.widget.provider");
     private final ArrayList<TopTrack> topMusics = new ArrayList<TopTrack>();
@@ -41,6 +44,9 @@ public class TopMusicDataProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        // DIsponibiliza o contexto
+        globalContext = getContext();
+
         // Update data
         updateData();
 
@@ -64,6 +70,10 @@ public class TopMusicDataProvider extends ContentProvider {
         final MatrixCursor c = new MatrixCursor(new String[]{TopTrack.NAME});
 
         for (int i = 0; i < 5; i++) {
+            if (this.topMusics.size() <= i) {
+                return c;
+            }
+
             final TopTrack data = this.topMusics.get(i);
             c.addRow(new Object[]{data.getName()});
         }

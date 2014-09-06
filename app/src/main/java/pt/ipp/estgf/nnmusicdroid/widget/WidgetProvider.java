@@ -48,6 +48,8 @@ class WidgetDataProviderObserver extends ContentObserver {
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class WidgetProvider extends AppWidgetProvider {
 
+    public static Context globalContext;
+
     public static String CLICK_ACTION = "pt.ipp.estgf.nnmusicdroid.listwidget.CLICK";
     public static String REFRESH_ACTION = "pt.ipp.estgf.nnmusicdroid.widget.REFRESH";
     public static String EXTRA_PLACE_ID = "pt.ipp.estgf.nnmusicdroid.widget.place";
@@ -67,6 +69,9 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onEnabled(Context context) {
         Log.d("WidgetProvider", "onEnabled");
         final ContentResolver r = context.getContentResolver();
+
+        // Disponibiliza o contexto
+        globalContext = context;
 
         if (sDataObserver == null) {
             final AppWidgetManager mgr = AppWidgetManager.getInstance(context);

@@ -11,6 +11,7 @@ import pt.ipp.estgf.cmu.musicdroidlib.DatabaseHelper;
 import pt.ipp.estgf.cmu.musicdroidlib.ScriptFileReader;
 import pt.ipp.estgf.nnmusicdroid.MainActivity;
 import pt.ipp.estgf.nnmusicdroid.R;
+import pt.ipp.estgf.nnmusicdroid.other.Utils;
 
 
 /**
@@ -71,7 +72,7 @@ public class MyDbAccess extends DatabaseHelper {
      */
     @Override
     protected void execSQLScript(int fileRes, SQLiteDatabase _db) {
-        ScriptFileReader sfr = new ScriptFileReader(MainActivity.globalContext, fileRes);
+        ScriptFileReader sfr = new ScriptFileReader(Utils.getContext(), fileRes);
         sfr.open();
 
         // Cria um novo StringBuilder

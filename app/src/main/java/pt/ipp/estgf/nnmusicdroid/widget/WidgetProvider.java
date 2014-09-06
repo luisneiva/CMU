@@ -155,6 +155,11 @@ public class WidgetProvider extends AppWidgetProvider {
                 db.close();
             }
 
+            // Se o place for null termina
+            if (place == null) {
+                return;
+            }
+
             rv.setTextViewText(R.id.appwidget_text, place.getName());
 
             // Ao clicar no nome do pais abre a aplicação

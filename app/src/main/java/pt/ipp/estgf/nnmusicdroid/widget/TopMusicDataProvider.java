@@ -9,6 +9,7 @@ import android.net.Uri;
 
 import java.util.ArrayList;
 
+import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.cmu.musicdroidlib.TopTrack;
 import pt.ipp.estgf.nnmusicdroid.LocationUtils;
 import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
@@ -57,15 +58,28 @@ public class TopMusicDataProvider extends ContentProvider {
     private void updateData() {
         MyDbAccess dbHelper = new MyDbAccess(Utils.getContext());
 
-        // Obtem o Place correspondente à localização atual
-        LocationUtils locationUtils = new LocationUtils(getContext());
-        final MyPlace place = locationUtils.getCurrentPlace();
+        MyPlace tempPlace = null;
+        long placeID = 0l;
 
-        // Guarda o place na base de dados
-        MyPlace.delete(0l, dbHelper.getWritableDatabase());
-        place.create(dbHelper.getWritableDatabase());
+        if (Utils.isToUserCurrentPlace()) {
+            // Obtem o Place correspondente à localização atual
+            LocationUtils locationUtils = new LocationUtils(getContext());
+            tempPlace = locationUtils.getCurrentPlace();
+
+            // Guarda o place na base de dados
+            MyPlace.delete(0l, dbHelper.getWritableDatabase());
+
+            tempPlace.create(dbHelper.getWritableDatabase());
+
+            placeID = 0l;
+        } else {
+            placeID = Utils.getSelectedDefaultPlace();
+        }
+
+        final long placeIDF = placeID;
 
         dbHelper.close();
+
 
         // Carrega os dados para a lista
         //MyDbAccess dbHelper = new MyDbAccess(getContext());
@@ -77,13 +91,13 @@ public class TopMusicDataProvider extends ContentProvider {
             public void run() {
                 // Carrega os dados para a lista
                 MyDbAccess dbHelper = new MyDbAccess(Utils.getContext());
-                TopTrack.getForPlace(place.getId(), topMusics, dbHelper.getReadableDatabase());
+                TopTrack.getForPlace(placeIDF, topMusics, dbHelper.getReadableDatabase());
                 dbHelper.close();
             }
         });
 
         // Inicia a task
-        task.execute(place.getId());
+        task.execute(placeID);
     }
 
     @Override

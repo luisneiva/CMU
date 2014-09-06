@@ -21,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pt.ipp.estgf.cmu.musicdroidlib.Place;
 import pt.ipp.estgf.nnmusicdroid.R;
@@ -70,16 +71,29 @@ public class PreferencesActivity extends PreferenceActivity {
 
         ListPreference listPreferenceCategory = (ListPreference) findPreference("pref_default_country_key");
         if (listPreferenceCategory != null) {
-            CharSequence entries[] = new String[placesList.size()];
-            CharSequence entryValues[] = new String[placesList.size()];
-            int i = 0;
+
+            List<CharSequence> entries = new ArrayList<CharSequence>();
+            List<CharSequence> entryValues = new ArrayList<CharSequence>();
+
             for (Place place : placesList) {
-                entries[i] = place.getName();
-                entryValues[i] = Integer.toString(i);
-                i++;
+                // Ignora o place temporário
+                if (place.getId() == 0) {
+                    continue;
+                }
+
+                entries.add(place.getName());
+                entryValues.add(String.valueOf(place.getId()));
             }
-            listPreferenceCategory.setEntries(entries);
-            listPreferenceCategory.setEntryValues(entryValues);
+
+            CharSequence entriesArray[] = new String[entries.size()];
+            CharSequence entryValuesArray[] = new String[entries.size()];
+
+            // Copia a lista para um array
+            System.arraycopy(entries.toArray(), 0, entriesArray, 0, entries.size());
+            System.arraycopy(entryValues.toArray(), 0, entryValuesArray, 0, entries.size());
+
+            listPreferenceCategory.setEntries(entriesArray);
+            listPreferenceCategory.setEntryValues(entryValuesArray);
         }
     }
 
@@ -98,7 +112,6 @@ public class PreferencesActivity extends PreferenceActivity {
             timeUpdate_item.add("7 Dias");
         }
     }
-
 
     /**
      * Método que altera o tipo de mapa para NORMAL
@@ -167,4 +180,5 @@ public class PreferencesActivity extends PreferenceActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

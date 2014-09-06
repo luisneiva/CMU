@@ -5,7 +5,7 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="pref_atual_location_key"
-            android:summary="Utilizar o TOP da localização atual na widget? Se não, esolha outra país abaixo"
+            android:summary="Utilizar o TOP da localização atual na widget? Se não, escolha outro país abaixo"
             android:title="Localização Atual"/>
     </PreferenceCategory>
 

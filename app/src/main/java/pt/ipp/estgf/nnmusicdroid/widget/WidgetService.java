@@ -71,13 +71,17 @@ class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         rv.setTextViewText(R.id.widget_item, musicName);
 
         // Cria um intent para lançar a Activity com os detalhes
-        Intent intent = new Intent(Utils.getContext(), MusicDetails.class);
+        /*Intent intent = new Intent(Utils.getContext(), MusicDetails.class);
         intent.putExtra("ArtistName", artistName);
-        intent.putExtra("TrackName", musicName);
-        PendingIntent pendingIntent = PendingIntent.getActivity(Utils.getContext(), 0, intent, 0);
+        intent.putExtra("TrackName", musicName);*/
+        Bundle extras = new Bundle();
+        extras.putString("ArtistName", artistName);
+        extras.putString("TrackName", musicName);
+        Intent intent = new Intent();
+        intent.putExtras(extras);
 
         // Associa o intent a linha
-        rv.setOnClickPendingIntent(R.id.widget_item, pendingIntent);
+        rv.setOnClickFillInIntent(R.id.widget_item, intent);
 
         return rv;
     }

@@ -27,6 +27,8 @@ import pt.ipp.estgf.nnmusicdroid.LocationUtils;
 import pt.ipp.estgf.nnmusicdroid.MainActivity;
 import pt.ipp.estgf.nnmusicdroid.MusicListActivity;
 import pt.ipp.estgf.nnmusicdroid.R;
+import pt.ipp.estgf.nnmusicdroid.dbAccess.MyDbAccess;
+import pt.ipp.estgf.nnmusicdroid.model.MyPlace;
 import pt.ipp.estgf.nnmusicdroid.other.Utils;
 
 /**
@@ -142,18 +144,26 @@ public class WidgetProvider extends AppWidgetProvider {
             rv.setEmptyView(R.id.top_music_list, android.R.id.empty);
 
             // Coloca o nome do place
-            // Obtem o Place correspondente à localização atual
-            LocationUtils locationUtils = new LocationUtils(context);
-            Place place = locationUtils.getCurrentPlace();
+            Place place = null;
+            if (Utils.isToUserCurrentPlace()) {
+                // Obtem o Place correspondente à localização atual
+                LocationUtils locationUtils = new LocationUtils(context);
+                place = locationUtils.getCurrentPlace();
+            } else {
+                MyDbAccess db = new MyDbAccess(Utils.getContext());
+                place = Place.get(Utils.getSelectedDefaultPlace(), db.getReadableDatabase());
+                db.close();
+            }
+
             rv.setTextViewText(R.id.appwidget_text, place.getName());
 
             // Ao clicar no nome do pais abre a aplicação
             Intent intentOpenMain = new Intent(context, MusicListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intentOpenMain.setData(Uri.parse(intentOpenMain.toUri(Intent.URI_INTENT_SCHEME)));
-            intentOpenMain.putExtra("id", 0l);
+            intentOpenMain.putExtra("id", place.getId());
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intentOpenMain, 0);
             rv.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
-
 
             appWidgetManager.updateAppWidget(appWidgetIds[i], rv);
         }

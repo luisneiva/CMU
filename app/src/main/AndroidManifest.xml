@@ -87,19 +87,26 @@
                 android:resource="@xml/widget_provider" />
         </receiver>
 
-        <service android:name=".widget.WidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"
-            android:exported="true" />
+        <service
+            android:name=".widget.WidgetService"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <provider
-            android:authorities="pt.ipp.estgf.nnmusicdroid.widget.provider"
-            android:name=".widget.TopMusicDataProvider" />
-
+            android:name=".widget.TopMusicDataProvider"
+            android:authorities="pt.ipp.estgf.nnmusicdroid.widget.provider" />
 
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/title_activity_preferences" >
         </activity>
+
+        <!-- Serviço para atualizar periodicamente os top's -->
+        <service
+            android:name=".other.UpdateService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

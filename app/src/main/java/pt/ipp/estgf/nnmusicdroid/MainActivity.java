@@ -17,6 +17,8 @@ import android.widget.Button;
 
 import java.security.Signature;
 
+import pt.ipp.estgf.nnmusicdroid.other.UpdateService;
+
 /**
  * Lição 02, ficheiro: 4_interface_grafica
  */
@@ -24,10 +26,16 @@ public class MainActivity extends ActionBarActivity {
 
     public static Context globalContext;
 
+    // Service intent
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Configura o Intent
+        this.intent = new Intent(this, UpdateService.class);
 
         // Torna o contexto disponivel para toda a aplicação
         globalContext = this.getApplicationContext();
@@ -130,4 +138,19 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Inicia o serviço
+        startService(this.intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Termina o serviço
+        stopService(this.intent);
+    }
 }

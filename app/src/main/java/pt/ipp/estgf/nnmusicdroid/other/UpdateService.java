@@ -49,7 +49,7 @@ public final class UpdateService extends Service {
             db.close();
 
             // Regista novamente o serviço
-            handler.postDelayed(updateAllPlacesData, 50000);
+            handler.postDelayed(updateAllPlacesData, Utils.getServiceTimeInterval());
         }
     };
 

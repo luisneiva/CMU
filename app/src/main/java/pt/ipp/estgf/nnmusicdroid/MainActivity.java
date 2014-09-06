@@ -10,6 +10,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -152,5 +153,15 @@ public class MainActivity extends ActionBarActivity {
 
         // Termina o serviço
         stopService(this.intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Termina o serviço
+        stopService(this.intent);
+
+        Log.d("MainActivity", "Serviço destruido...");
     }
 }

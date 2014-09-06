@@ -63,8 +63,13 @@ public class TopMusicDataProvider extends ContentProvider {
 
         if (Utils.isToUserCurrentPlace()) {
             // Obtem o Place correspondente à localização atual
-            LocationUtils locationUtils = new LocationUtils(getContext());
+            LocationUtils locationUtils = new LocationUtils(Utils.getContext());
             tempPlace = locationUtils.getCurrentPlace();
+
+            if (tempPlace == null) {
+                dbHelper.close();
+                return;
+            }
 
             // Guarda o place na base de dados
             MyPlace.delete(0l, dbHelper.getWritableDatabase());

@@ -45,4 +45,10 @@ public class Utils {
         return Integer.parseInt(mSettings.getString("pref_default_country_key", "0"));
     }
 
+    public static long getServiceTimeInterval() {
+        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(Utils.getContext());
+
+        return Long.parseLong(mSettings.getString("pref_time_update_key", "3600000"));
+    }
+
 }
